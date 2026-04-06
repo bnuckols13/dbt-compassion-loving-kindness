@@ -225,6 +225,134 @@
         .guided-text { color: var(--slate); font-size: 0.95rem; line-height: 1.7; }
         .guided-text em { color: var(--midnight); font-style: italic; }
 
+        /* ===== GAMIFIED PRACTICE ===== */
+        .quest-header { text-align: center; margin-bottom: 1.5rem; }
+        .quest-title { font-size: 1.1rem; font-weight: 700; color: var(--midnight); margin-bottom: 0.25rem; }
+        .quest-sub { font-size: 0.88rem; color: var(--slate); }
+
+        /* XP bar */
+        .xp-bar-wrap { background: rgba(253,164,175,0.12); border-radius: 50px; height: 18px; margin: 1.25rem 0; overflow: hidden; position: relative; border: 1px solid rgba(253,164,175,0.25); }
+        .xp-bar-fill { height: 100%; background: var(--gradient-heart); border-radius: 50px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); width: 0%; }
+        .xp-label { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.65rem; font-weight: 700; color: var(--deep-rose); letter-spacing: 0.05em; }
+
+        /* Level badges */
+        .level-track { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.75rem; flex-wrap: wrap; }
+        .level-badge {
+            width: 56px; height: 56px; border-radius: 50%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; font-size: 1.2rem;
+            background: var(--pearl); border: 2.5px solid rgba(253,164,175,0.2);
+            transition: all 0.4s ease; cursor: pointer; position: relative;
+        }
+        .level-badge .lvl-num { font-size: 0.55rem; font-weight: 700; color: var(--slate); letter-spacing: 0.08em; margin-top: 1px; }
+        .level-badge.active { border-color: var(--deep-rose); background: white; transform: scale(1.15); box-shadow: 0 4px 20px rgba(253,164,175,0.3); }
+        .level-badge.done { border-color: var(--primary-rose); background: rgba(253,164,175,0.1); }
+        .level-badge.done::after { content: '\2713'; position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%; background: var(--deep-rose); color: white; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .level-badge.locked { opacity: 0.4; cursor: default; }
+        .level-connector { width: 30px; height: 2px; background: rgba(253,164,175,0.2); align-self: center; border-radius: 2px; }
+        .level-connector.done { background: var(--primary-rose); }
+
+        /* Quest stages */
+        .quest-stage { display: none; animation: fadeIn 0.5s ease both; }
+        .quest-stage.active { display: block; }
+
+        /* Flip cards for practice */
+        .flip-spread { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
+        .flip-card {
+            width: 140px; height: 200px; perspective: 800px; cursor: pointer; flex-shrink: 0;
+        }
+        .flip-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+        .flip-face {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            border-radius: 14px; display: flex; align-items: center;
+            justify-content: center; text-align: center; flex-direction: column; padding: 0.75rem;
+        }
+        .flip-back {
+            background: linear-gradient(135deg, #2d2040 0%, #1a1a2e 100%);
+            border: 2px solid rgba(196,181,253,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .flip-back-glyph { font-size: 2rem; opacity: 0.4; margin-bottom: 0.3rem; }
+        .flip-back-label { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(196,181,253,0.5); }
+        .flip-front {
+            transform: rotateY(180deg);
+            background: white; border: 1.5px solid var(--primary-rose);
+            box-shadow: 0 4px 20px rgba(253,164,175,0.15);
+        }
+        .flip-front .ff-emoji { font-size: 1.4rem; margin-bottom: 0.4rem; }
+        .flip-front .ff-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.3rem; }
+        .flip-front .ff-text { font-size: 0.82rem; color: var(--midnight); font-weight: 600; line-height: 1.35; }
+        .flip-front .ff-hint { font-size: 0.7rem; color: var(--slate); margin-top: 0.4rem; line-height: 1.4; font-style: italic; }
+
+        /* Spinner wheel */
+        .wheel-wrap { display: flex; flex-direction: column; align-items: center; margin: 1.5rem 0; }
+        .wheel-container { position: relative; width: 280px; height: 280px; }
+        .wheel-svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.12)); }
+        .wheel-pointer {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 14px solid transparent;
+            border-right: 14px solid transparent; border-top: 22px solid var(--deep-rose);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); z-index: 2;
+        }
+        .spin-btn {
+            margin-top: 1.25rem; padding: 0.8rem 2.5rem; background: var(--gradient-heart);
+            color: white; border: none; border-radius: 50px; font-size: 1rem;
+            font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(253,164,175,0.35); letter-spacing: 0.03em;
+        }
+        .spin-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 25px rgba(253,164,175,0.5); }
+        .spin-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+        .wheel-result {
+            margin-top: 1.25rem; padding: 1.25rem 1.5rem; background: white;
+            border-radius: 14px; border: 1.5px solid rgba(253,164,175,0.25);
+            text-align: center; display: none; animation: slideUp 0.4s ease both;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .wheel-result.show { display: block; }
+        .wr-emoji { font-size: 1.5rem; margin-bottom: 0.4rem; }
+        .wr-who { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.3rem; }
+        .wr-phrase { font-size: 1.1rem; font-weight: 600; color: var(--midnight); line-height: 1.5; margin-bottom: 0.5rem; }
+        .wr-prompt { font-size: 0.88rem; color: var(--slate); font-style: italic; }
+
+        /* Phrase builder */
+        .builder-area { margin: 1.5rem 0; }
+        .builder-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; justify-content: center; }
+        .builder-chip {
+            padding: 0.55rem 1.1rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600;
+            cursor: pointer; transition: all 0.25s ease; border: 2px solid rgba(253,164,175,0.2);
+            background: white; color: var(--slate);
+        }
+        .builder-chip:hover { border-color: var(--primary-rose); transform: translateY(-2px); }
+        .builder-chip.selected { background: var(--gradient-heart); color: white; border-color: transparent; box-shadow: 0 3px 12px rgba(253,164,175,0.3); }
+        .builder-label { text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.5rem; }
+        .builder-preview {
+            text-align: center; padding: 1.5rem; background: linear-gradient(135deg, rgba(253,164,175,0.06) 0%, rgba(196,181,253,0.06) 100%);
+            border: 1.5px solid rgba(253,164,175,0.25); border-radius: 16px; margin-top: 1.25rem;
+            min-height: 70px; display: flex; align-items: center; justify-content: center;
+        }
+        .builder-preview-text { font-size: 1.2rem; font-weight: 700; color: var(--midnight); line-height: 1.5; }
+        .builder-preview-text.placeholder { color: var(--warm-gray); font-weight: 400; font-size: 0.95rem; }
+
+        /* Complete stage celebration */
+        .stage-complete {
+            text-align: center; padding: 2rem; animation: pop 0.5s ease both;
+        }
+        @keyframes pop { 0% { transform:scale(0.8); opacity:0; } 60% { transform:scale(1.05); } 100% { transform:scale(1); opacity:1; } }
+        .stage-complete .sc-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .stage-complete .sc-title { font-size: 1.2rem; font-weight: 700; color: var(--midnight); margin-bottom: 0.25rem; }
+        .stage-complete .sc-sub { font-size: 0.92rem; color: var(--slate); margin-bottom: 1rem; }
+        .next-level-btn {
+            padding: 0.7rem 2rem; background: var(--gradient-heart); color: white;
+            border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253,164,175,0.3);
+        }
+        .next-level-btn:hover { transform: translateY(-2px); }
+
         .btn { padding: 0.75rem 2rem; background: var(--gradient-heart); color: white; border: none; border-radius: 50px; font-size: 0.97rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253,164,175,0.3); }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(253,164,175,0.42); }
         .btn-secondary { background: white; color: var(--deep-rose); border: 2px solid var(--primary-rose); box-shadow: none; margin-left: 0.75rem; }
@@ -499,77 +627,201 @@
         </div>
 
 
-        <!-- ======== PAGE 2: GUIDED PRACTICE ======== -->
+        <!-- ======== PAGE 2: GAMIFIED PRACTICE ======== -->
         <div class="page" id="page2">
 
             <div class="card calm">
                 <h2>
-                    <div class="icon-circle icon-calm">&#x1F9D8;</div>
-                    Loving-Kindness Practice
-                    <span class="timing-badge">10-12 min</span>
+                    <div class="icon-circle icon-calm">&#x1F3AE;</div>
+                    The Compassion Quest
+                    <span class="timing-badge">15-20 min</span>
                 </h2>
-                <p style="color:var(--slate); line-height:1.8; margin-bottom:0.5rem;">
-                    A guided loving-kindness meditation adapted for recovery. Read slowly. Leave space between each step.
-                </p>
 
-                <div class="guided-block">
-                    <div class="guided-label">&#x1F54A; Guided Loving-Kindness</div>
+                <div class="quest-header">
+                    <div class="quest-sub">Four levels. Each one stretches your compassion a little further. Go at the group's pace.</div>
+                </div>
 
-                    <div class="guided-step">
-                        <div class="guided-num">1</div>
-                        <div class="guided-text">
-                            Find a comfortable position. You can close your eyes or soften your gaze.
-                            Take three slow breaths. <em>There's nowhere you need to be right now except here.</em>
+                <div class="xp-bar-wrap">
+                    <div class="xp-bar-fill" id="xpBar"></div>
+                    <div class="xp-label" id="xpLabel">0 / 4</div>
+                </div>
+
+                <div class="level-track" id="levelTrack">
+                    <div class="level-badge active" onclick="goToStage(0)" id="lvl0">&#x1F49B;<div class="lvl-num">LVL 1</div></div>
+                    <div class="level-connector" id="conn0"></div>
+                    <div class="level-badge locked" onclick="goToStage(1)" id="lvl1">&#x1F30A;<div class="lvl-num">LVL 2</div></div>
+                    <div class="level-connector" id="conn1"></div>
+                    <div class="level-badge locked" onclick="goToStage(2)" id="lvl2">&#x1F525;<div class="lvl-num">LVL 3</div></div>
+                    <div class="level-connector" id="conn2"></div>
+                    <div class="level-badge locked" onclick="goToStage(3)" id="lvl3">&#x1F31F;<div class="lvl-num">LVL 4</div></div>
+                </div>
+
+                <!-- ===== STAGE 0: Card Draw — Someone You Care About ===== -->
+                <div class="quest-stage active" id="stage0">
+                    <div class="quest-title">Level 1: Send It to Someone Easy</div>
+                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">Flip a card to reveal a loving-kindness phrase. Direct it toward someone you care about.</div>
+                    <div class="pass-reminder" style="margin-top:0;">
+                        <span class="sym">&#x1F90D;</span>
+                        <div>Think of a person or pet whose warmth you can feel. Hold them in your mind.</div>
+                    </div>
+
+                    <div class="flip-spread" id="flipSpread0">
+                        <div class="flip-card" onclick="flipCard(this,0)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
+                                <div class="flip-face flip-front"><div class="ff-emoji">&#x1F9E1;</div><div class="ff-label">Safe</div><div class="ff-text">May you be safe.</div><div class="ff-hint">Protected. Held. Out of harm's way.</div></div>
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="flipCard(this,0)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
+                                <div class="flip-face flip-front"><div class="ff-emoji">&#x2728;</div><div class="ff-label">Happy</div><div class="ff-text">May you be happy.</div><div class="ff-hint">Not performing happiness. Actually feeling it.</div></div>
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="flipCard(this,0)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
+                                <div class="flip-face flip-front"><div class="ff-emoji">&#x1F33F;</div><div class="ff-label">Healthy</div><div class="ff-text">May you be healthy.</div><div class="ff-hint">In body, in mind, in the way you treat yourself.</div></div>
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="flipCard(this,0)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
+                                <div class="flip-face flip-front"><div class="ff-emoji">&#x1F54A;</div><div class="ff-label">At Ease</div><div class="ff-text">May you live with ease.</div><div class="ff-hint">Not striving. Not bracing. Just being.</div></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="guided-step">
-                        <div class="guided-num">2</div>
-                        <div class="guided-text">
-                            Bring to mind someone who cares about you. It could be a person, a pet, anyone whose warmth you can feel.
-                            Picture them. Notice what that feels like in your body.
-                            <em>Silently offer them these words:</em><br>
-                            <strong>"May you be safe. May you be happy. May you be healthy. May you live with ease."</strong>
-                        </div>
-                    </div>
-
-                    <div class="guided-step">
-                        <div class="guided-num">3</div>
-                        <div class="guided-text">
-                            Now turn those same words toward yourself. This might feel strange. It might feel hard. That's okay.
-                            <em>You don't have to force anything. Just be willing to try.</em><br>
-                            <strong>"May I be safe. May I be happy. May I be healthy. May I live with ease."</strong>
-                        </div>
-                    </div>
-
-                    <div class="guided-step">
-                        <div class="guided-num">4</div>
-                        <div class="guided-text">
-                            If the words feel too big, try smaller ones:<br>
-                            <strong>"May I be okay today."</strong> or <strong>"May I be a little kinder to myself."</strong><br>
-                            <em>Find the version that your system can actually receive right now.</em>
-                        </div>
-                    </div>
-
-                    <div class="guided-step">
-                        <div class="guided-num">5</div>
-                        <div class="guided-text">
-                            Now expand outward. Think of the people in this room, everyone in their own recovery, fighting their own battle.
-                            <em>Silently offer:</em><br>
-                            <strong>"May we be safe. May we be happy. May we be healthy. May we live with ease."</strong>
-                        </div>
-                    </div>
-
-                    <div class="guided-step">
-                        <div class="guided-num">6</div>
-                        <div class="guided-text">
-                            Take one more breath. Notice how you feel &mdash; no judgment, just noticing.
-                            <em>When you're ready, open your eyes.</em>
-                        </div>
+                    <div class="stage-complete" id="complete0" style="display:none;">
+                        <div class="sc-emoji">&#x1F49B;</div>
+                        <div class="sc-title">Level 1 Complete</div>
+                        <div class="sc-sub">You offered kindness to someone you care about. That's where it starts.</div>
+                        <button class="next-level-btn" onclick="unlockStage(1)">Unlock Level 2 &rarr;</button>
                     </div>
                 </div>
 
-                <div class="facilitator-note">
+                <!-- ===== STAGE 1: Spin the Wheel — Toward Yourself ===== -->
+                <div class="quest-stage" id="stage1">
+                    <div class="quest-title">Level 2: Turn It Toward Yourself</div>
+                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">This is the hard part. Spin the wheel. Whatever it lands on, try saying it to yourself — silently or out loud.</div>
+
+                    <div class="wheel-wrap">
+                        <div class="wheel-container">
+                            <div class="wheel-pointer"></div>
+                            <svg class="wheel-svg" viewBox="0 0 280 280" id="wheelSvg">
+                                <g id="wheelGroup" style="transform-origin:140px 140px; transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99);">
+                                </g>
+                                <circle cx="140" cy="140" r="22" fill="white" stroke="rgba(253,164,175,0.3)" stroke-width="2"/>
+                                <text x="140" y="145" text-anchor="middle" font-size="16" fill="#E11D48">&#x2661;</text>
+                            </svg>
+                        </div>
+                        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin</button>
+                    </div>
+
+                    <div class="wheel-result" id="wheelResult">
+                        <div class="wr-emoji" id="wrEmoji"></div>
+                        <div class="wr-who">For You</div>
+                        <div class="wr-phrase" id="wrPhrase"></div>
+                        <div class="wr-prompt" id="wrPrompt"></div>
+                    </div>
+
+                    <div class="stage-complete" id="complete1" style="display:none;">
+                        <div class="sc-emoji">&#x1F30A;</div>
+                        <div class="sc-title">Level 2 Complete</div>
+                        <div class="sc-sub">You turned kindness toward yourself. That takes real courage.</div>
+                        <button class="next-level-btn" onclick="unlockStage(2)">Unlock Level 3 &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- ===== STAGE 2: Phrase Builder — Customize Your Own ===== -->
+                <div class="quest-stage" id="stage2">
+                    <div class="quest-title">Level 3: Build Your Own Phrase</div>
+                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">The classic phrases don't always land. Build one that your system can actually receive right now.</div>
+
+                    <div class="builder-area">
+                        <div class="builder-label">Start with...</div>
+                        <div class="builder-row" id="builderRow0">
+                            <div class="builder-chip" onclick="selectChip(this,0)">May I</div>
+                            <div class="builder-chip" onclick="selectChip(this,0)">I deserve</div>
+                            <div class="builder-chip" onclick="selectChip(this,0)">It's okay to</div>
+                            <div class="builder-chip" onclick="selectChip(this,0)">I'm allowed to</div>
+                        </div>
+
+                        <div class="builder-label">Then...</div>
+                        <div class="builder-row" id="builderRow1">
+                            <div class="builder-chip" onclick="selectChip(this,1)">be okay today</div>
+                            <div class="builder-chip" onclick="selectChip(this,1)">rest without earning it</div>
+                            <div class="builder-chip" onclick="selectChip(this,1)">take up space</div>
+                            <div class="builder-chip" onclick="selectChip(this,1)">not have it figured out</div>
+                            <div class="builder-chip" onclick="selectChip(this,1)">feel what I feel</div>
+                            <div class="builder-chip" onclick="selectChip(this,1)">be kind to myself</div>
+                        </div>
+
+                        <div class="builder-label">Add a closer (optional)...</div>
+                        <div class="builder-row" id="builderRow2">
+                            <div class="builder-chip" onclick="selectChip(this,2)">even when it's hard</div>
+                            <div class="builder-chip" onclick="selectChip(this,2)">without proving anything</div>
+                            <div class="builder-chip" onclick="selectChip(this,2)">right now</div>
+                            <div class="builder-chip" onclick="selectChip(this,2)">just as I am</div>
+                        </div>
+
+                        <div class="builder-preview" id="builderPreview">
+                            <div class="builder-preview-text placeholder" id="builderText">Your phrase will appear here...</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center; margin-top:1rem;">
+                        <button class="next-level-btn" id="builderDone" onclick="completeBuilder()" style="opacity:0.4; pointer-events:none;">Lock It In &#x1F512;</button>
+                    </div>
+
+                    <div class="stage-complete" id="complete2" style="display:none;">
+                        <div class="sc-emoji">&#x1F525;</div>
+                        <div class="sc-title">Level 3 Complete</div>
+                        <div class="sc-sub">You made it yours. That phrase belongs to you now.</div>
+                        <button class="next-level-btn" onclick="unlockStage(3)">Unlock Level 4 &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- ===== STAGE 3: Send It to the Group ===== -->
+                <div class="quest-stage" id="stage3">
+                    <div class="quest-title">Level 4: Expand Outward</div>
+                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">Now send it to the people in this room. Everyone here is fighting their own battle. Flip the cards together.</div>
+
+                    <div class="flip-spread" id="flipSpread3">
+                        <div class="flip-card" onclick="flipCard(this,3)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
+                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x1F6E1;</div><div class="ff-label">Safety</div><div class="ff-text">May we be safe.</div><div class="ff-hint">All of us. In this room and beyond it.</div></div>
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="flipCard(this,3)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
+                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x2600;</div><div class="ff-label">Joy</div><div class="ff-text">May we be happy.</div><div class="ff-hint">Not the performance. The real thing.</div></div>
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="flipCard(this,3)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
+                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x1F33F;</div><div class="ff-label">Health</div><div class="ff-text">May we be healthy.</div><div class="ff-hint">Recovery is health. Showing up is health.</div></div>
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="flipCard(this,3)">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
+                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x1F54A;</div><div class="ff-label">Ease</div><div class="ff-text">May we live with ease.</div><div class="ff-hint">No one in this room has to do this alone.</div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stage-complete" id="complete3" style="display:none;">
+                        <div class="sc-emoji">&#x1F31F;</div>
+                        <div class="sc-title">Quest Complete</div>
+                        <div class="sc-sub">You went from someone easy, to yourself, to building your own phrase, to sending it outward. That's the whole practice.</div>
+                    </div>
+                </div>
+
+                <div class="facilitator-note" style="margin-top:2rem;">
                     <div class="fn-label">Facilitator Note</div>
                     <p>
                         Some teens will resist directing kindness toward themselves. That resistance is information, not failure.
@@ -699,6 +951,7 @@
     </div><!-- /container -->
 
     <script>
+        // ---- Nav ----
         function showPage(index, btn) {
             document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === index));
             if (btn) {
@@ -731,6 +984,179 @@
             document.querySelectorAll('.checkin-option').forEach(o => o.classList.remove('selected'));
             el.classList.add('selected');
         }
+
+        // ===== GAMIFIED PRACTICE ENGINE =====
+        let currentStage = 0;
+        let stagesCompleted = 0;
+        const flipCounts = { 0: 0, 3: 0 };
+        const FLIP_NEEDED = 4;
+
+        // -- XP Bar --
+        function updateXP() {
+            const pct = (stagesCompleted / 4) * 100;
+            document.getElementById('xpBar').style.width = pct + '%';
+            document.getElementById('xpLabel').textContent = stagesCompleted + ' / 4';
+        }
+
+        // -- Level badges --
+        function updateBadges() {
+            for (let i = 0; i < 4; i++) {
+                const badge = document.getElementById('lvl' + i);
+                badge.classList.remove('active', 'done', 'locked');
+                if (i < stagesCompleted) badge.classList.add('done');
+                else if (i === currentStage) badge.classList.add('active');
+                else badge.classList.add('locked');
+            }
+            for (let i = 0; i < 3; i++) {
+                const conn = document.getElementById('conn' + i);
+                conn.classList.toggle('done', i < stagesCompleted);
+            }
+        }
+
+        // -- Stage navigation --
+        function goToStage(idx) {
+            if (idx > stagesCompleted) return;
+            currentStage = idx;
+            document.querySelectorAll('.quest-stage').forEach((s, i) => s.classList.toggle('active', i === idx));
+            updateBadges();
+        }
+
+        function unlockStage(idx) {
+            stagesCompleted = idx;
+            currentStage = idx;
+            updateXP();
+            document.querySelectorAll('.quest-stage').forEach((s, i) => s.classList.toggle('active', i === idx));
+            updateBadges();
+        }
+
+        function showStageComplete(stageIdx) {
+            const el = document.getElementById('complete' + stageIdx);
+            el.style.display = 'block';
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // -- Flip Cards --
+        function flipCard(el, stageIdx) {
+            if (el.classList.contains('flipped')) return;
+            el.classList.add('flipped');
+            flipCounts[stageIdx] = (flipCounts[stageIdx] || 0) + 1;
+            if (flipCounts[stageIdx] >= FLIP_NEEDED) {
+                setTimeout(() => showStageComplete(stageIdx), 600);
+            }
+        }
+
+        // ===== SPINNER WHEEL =====
+        const WHEEL_ITEMS = [
+            { emoji: '\u{1F9E1}', who: 'For You', phrase: 'May I be safe.', prompt: 'Say it once, silently. Notice where you feel it.' },
+            { emoji: '\u{2728}', who: 'For You', phrase: 'May I be happy.', prompt: 'Not performing. Actually feeling. Even a sliver counts.' },
+            { emoji: '\u{1F33F}', who: 'For You', phrase: 'May I be healthy.', prompt: 'Body, mind, and the way you treat yourself.' },
+            { emoji: '\u{1F54A}', who: 'For You', phrase: 'May I live with ease.', prompt: 'Release one thing you\'re gripping right now.' },
+            { emoji: '\u{1F49B}', who: 'For You', phrase: 'May I be okay today.', prompt: 'Just today. That\'s enough scope.' },
+            { emoji: '\u{1F331}', who: 'For You', phrase: 'May I be a little kinder to myself.', prompt: 'Not all the way. Just a little. That\'s the practice.' },
+            { emoji: '\u{1F30A}', who: 'For You', phrase: 'May I forgive myself for being human.', prompt: 'Imperfection is the deal. Not a bug.' },
+            { emoji: '\u{1F525}', who: 'For You', phrase: 'May I have the courage to keep going.', prompt: 'You\'re here. That is evidence of courage.' }
+        ];
+
+        const COLORS = ['#FDA4AF','#C4B5FD','#FDDCB5','#93C5FD','#FBC2C8','#87A878','#FCD34D','#E8D5F5'];
+        let wheelAngle = 0;
+        let spinCount = 0;
+
+        function buildWheel() {
+            const g = document.getElementById('wheelGroup');
+            const n = WHEEL_ITEMS.length;
+            const slice = 360 / n;
+            let html = '';
+            for (let i = 0; i < n; i++) {
+                const startAngle = i * slice - 90;
+                const endAngle = startAngle + slice;
+                const r = 130;
+                const cx = 140, cy = 140;
+                const x1 = cx + r * Math.cos(startAngle * Math.PI / 180);
+                const y1 = cy + r * Math.sin(startAngle * Math.PI / 180);
+                const x2 = cx + r * Math.cos(endAngle * Math.PI / 180);
+                const y2 = cy + r * Math.sin(endAngle * Math.PI / 180);
+                const largeArc = slice > 180 ? 1 : 0;
+                const path = `M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`;
+                html += `<path d="${path}" fill="${COLORS[i]}" stroke="white" stroke-width="2"/>`;
+                const midAngle = (startAngle + slice / 2) * Math.PI / 180;
+                const tx = cx + (r * 0.65) * Math.cos(midAngle);
+                const ty = cy + (r * 0.65) * Math.sin(midAngle);
+                html += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="central" font-size="20">${WHEEL_ITEMS[i].emoji}</text>`;
+            }
+            g.innerHTML = html;
+        }
+
+        function spinWheel() {
+            const btn = document.getElementById('spinBtn');
+            btn.disabled = true;
+            const n = WHEEL_ITEMS.length;
+            const slice = 360 / n;
+            const extraSpins = 5 + Math.floor(Math.random() * 3);
+            const landIndex = Math.floor(Math.random() * n);
+            const targetAngle = extraSpins * 360 + (360 - landIndex * slice - slice / 2);
+            wheelAngle = targetAngle;
+            const g = document.getElementById('wheelGroup');
+            g.style.transform = `rotate(${targetAngle}deg)`;
+
+            setTimeout(() => {
+                const item = WHEEL_ITEMS[landIndex];
+                document.getElementById('wrEmoji').textContent = item.emoji;
+                document.getElementById('wrPhrase').textContent = item.phrase;
+                document.getElementById('wrPrompt').textContent = item.prompt;
+                const result = document.getElementById('wheelResult');
+                result.classList.remove('show');
+                void result.offsetWidth;
+                result.classList.add('show');
+                result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                btn.disabled = false;
+                spinCount++;
+                if (spinCount >= 2) {
+                    setTimeout(() => showStageComplete(1), 800);
+                }
+            }, 4200);
+        }
+
+        // ===== PHRASE BUILDER =====
+        const builderSelections = [null, null, null];
+
+        function selectChip(el, rowIdx) {
+            document.querySelectorAll(`#builderRow${rowIdx} .builder-chip`).forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            builderSelections[rowIdx] = el.textContent;
+            updateBuilderPreview();
+        }
+
+        function updateBuilderPreview() {
+            const parts = builderSelections.filter(Boolean);
+            const textEl = document.getElementById('builderText');
+            const doneBtn = document.getElementById('builderDone');
+            if (parts.length === 0) {
+                textEl.textContent = 'Your phrase will appear here...';
+                textEl.classList.add('placeholder');
+                doneBtn.style.opacity = '0.4';
+                doneBtn.style.pointerEvents = 'none';
+            } else {
+                let phrase = parts.join(' ');
+                if (!phrase.endsWith('.')) phrase += '.';
+                // Capitalize first letter
+                phrase = phrase.charAt(0).toUpperCase() + phrase.slice(1);
+                textEl.textContent = '"' + phrase + '"';
+                textEl.classList.remove('placeholder');
+                if (builderSelections[0] && builderSelections[1]) {
+                    doneBtn.style.opacity = '1';
+                    doneBtn.style.pointerEvents = 'auto';
+                }
+            }
+        }
+
+        function completeBuilder() {
+            document.getElementById('builderDone').style.display = 'none';
+            showStageComplete(2);
+        }
+
+        // Init wheel on load
+        buildWheel();
+        updateXP();
     </script>
 </body>
 </html>

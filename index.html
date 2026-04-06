@@ -3,370 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compassion &amp; Loving-Kindness — Adolescent Recovery Group</title>
+    <title>Compassion & Loving-Kindness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary-rose: #FDA4AF;
-            --deep-rose: #E11D48;
-            --soft-pink: #FBC2C8;
-            --gentle-lavender: #C4B5FD;
-            --warm-peach: #FDDCB5;
-            --calm-blue: #93C5FD;
-            --sage: #87A878;
-            --amber: #FCD34D;
-            --midnight: #1E293B;
-            --slate: #475569;
-            --warm-gray: #6B6B6B;
-            --pearl: #F8FAFC;
-            --gradient-heart: linear-gradient(135deg, #FDA4AF 0%, #C4B5FD 100%);
-            --gradient-warmth: linear-gradient(135deg, #FDDCB5 0%, #FDA4AF 100%);
-            --gradient-calm: linear-gradient(135deg, #93C5FD 0%, #C4B5FD 100%);
-            --gradient-earth: linear-gradient(135deg, #87A878 0%, #7BA7BC 100%);
-            --gradient-glow: linear-gradient(135deg, #FCD34D 0%, #FDA4AF 100%);
+            --text:       #1C1917;
+            --text-2:     #57534E;
+            --text-3:     #A8A29E;
+            --accent:     #8A5A6A;
+            --accent-bg:  #F5EDF0;
+            --warm:       #6A5A8A;
+            --warm-bg:    #F0EDF5;
+            --border:     #E7E5E4;
+            --bg:         #FAFAF7;
+            --surface:    #FFFFFF;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #FDA4AF10 0%, #C4B5FD10 100%);
-            min-height: 100vh;
-            color: var(--midnight);
-            line-height: 1.7;
-            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .bg-shape {
-            position: fixed; border-radius: 50%;
-            filter: blur(80px); opacity: 0.2;
-            pointer-events: none; z-index: 0;
+        body::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: var(--accent);
         }
-        .bg-1 { width: 380px; height: 380px; background: var(--primary-rose); top: -130px; right: -100px; animation: float 26s infinite ease-in-out; }
-        .bg-2 { width: 420px; height: 420px; background: var(--gentle-lavender); bottom: -160px; left: -160px; animation: float 22s infinite ease-in-out; animation-delay: -7s; }
-        .bg-3 { width: 260px; height: 260px; background: var(--warm-peach); top: 40%; right: 5%; animation: float 18s infinite ease-in-out; animation-delay: -13s; }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0,0) scale(1); }
-            33% { transform: translate(25px,-25px) scale(1.08); }
-            66% { transform: translate(-18px,18px) scale(0.93); }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
         }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
-
-        .header { text-align: center; margin-bottom: 2.5rem; animation: fadeIn 0.8s ease both; }
-        .header-eyebrow {
-            display: inline-block; background: rgba(253,164,175,0.15); color: var(--deep-rose);
-            font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-            padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1rem;
-            border: 1px solid rgba(253,164,175,0.3);
+        /* Header */
+        .header { margin-bottom: 2.5rem; }
+        .header-label {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
         }
         h1 {
-            font-size: 2.6rem; font-weight: 800;
-            background: var(--gradient-heart);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            line-height: 1.2; margin-bottom: 0.6rem;
+            font-size: 2.4rem; font-weight: 700; line-height: 1.15;
+            color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.5rem;
         }
-        .subtitle { color: var(--warm-gray); font-size: 1.1rem; }
+        .subtitle { font-size: 1.05rem; color: var(--text-2); }
 
-        .nav-pills { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
-        .nav-pill {
-            padding: 0.65rem 1.6rem; border-radius: 50px; background: white;
-            border: 2px solid transparent; color: var(--slate); cursor: pointer;
-            transition: all 0.3s ease; font-weight: 600; font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        /* Navigation */
+        .nav {
+            display: flex; gap: 0.25rem; border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
         }
-        .nav-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.11); }
-        .nav-pill.active { background: var(--gradient-heart); color: white; box-shadow: 0 4px 18px rgba(253,164,175,0.35); }
-
-        .phase-track { display: flex; gap: 0.4rem; justify-content: center; margin-bottom: 2rem; }
-        .phase-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(253,164,175,0.25); transition: all 0.3s ease; cursor: pointer; }
-        .phase-dot.active { background: var(--deep-rose); transform: scale(1.3); }
-        .phase-dot.done { background: rgba(253,164,175,0.6); }
-
-        .page { display: none; animation: fadeIn 0.55s ease both; }
-        .page.active { display: block; }
-
-        .card {
-            background: white; border-radius: 20px; padding: 2rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.07); margin-bottom: 2rem;
-            position: relative; overflow: hidden; transition: all 0.3s ease;
+        .nav button {
+            background: none; border: none; border-bottom: 2px solid transparent;
+            padding: 0.75rem 1rem; font-family: inherit; font-size: 0.875rem;
+            font-weight: 500; color: var(--text-3); cursor: pointer; white-space: nowrap;
+            transition: color 0.15s, border-color 0.15s;
         }
-        .card::before { content: ''; position: absolute; top:0; left:0; right:0; height:4px; background: var(--gradient-heart); }
-        .card.warm::before { background: var(--gradient-warmth); }
-        .card.earth::before { background: var(--gradient-earth); }
-        .card.calm::before { background: var(--gradient-calm); }
-        .card.glow::before { background: var(--gradient-glow); }
+        .nav button:hover { color: var(--text-2); }
+        .nav button.active { color: var(--accent); font-weight: 600; border-bottom-color: var(--accent); }
 
-        .card h2 { font-size: 1.5rem; font-weight: 700; color: var(--midnight); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-        .icon-circle { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; flex-shrink: 0; }
-        .icon-heart { background: var(--gradient-heart); }
-        .icon-warm { background: var(--gradient-warmth); }
-        .icon-earth { background: var(--gradient-earth); }
-        .icon-calm { background: var(--gradient-calm); }
-        .icon-glow { background: var(--gradient-glow); }
+        /* Pages */
+        .page { display: none; }
+        .page.active { display: block; animation: appear 0.25s ease; }
+        @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
 
-        .timing-badge { font-size: 0.78rem; font-weight: 600; background: rgba(253,164,175,0.12); color: var(--deep-rose); padding: 0.25rem 0.75rem; border-radius: 50px; border: 1px solid rgba(253,164,175,0.25); margin-left: auto; }
-
-        /* Confidentiality block */
-        .confidentiality-block {
-            background: linear-gradient(135deg, rgba(253,164,175,0.08) 0%, rgba(196,181,253,0.08) 100%);
-            border: 1.5px solid rgba(253,164,175,0.3);
-            border-radius: 16px;
-            padding: 1.5rem 1.75rem;
-            margin-bottom: 1.5rem;
+        /* Typography */
+        .section-label {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-3); margin-bottom: 0.5rem;
         }
-        .confidentiality-block .conf-label {
-            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--deep-rose); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;
+        .section-label.rose { color: var(--accent); }
+        .section-label.warm { color: var(--warm); }
+
+        h2 {
+            font-size: 1.35rem; font-weight: 700; color: var(--text);
+            letter-spacing: -0.01em; margin-bottom: 0.75rem;
         }
-        .confidentiality-block p {
-            color: var(--slate); line-height: 1.8; font-size: 0.97rem;
+        h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+        .body-text { font-size: 0.95rem; color: var(--text-2); line-height: 1.8; }
+        .body-text + .body-text { margin-top: 0.75rem; }
+        .body-text strong { color: var(--text); font-weight: 600; }
+
+        .timing {
+            font-size: 0.75rem; font-weight: 500; color: var(--text-3);
+            float: right; margin-top: 0.2rem;
         }
 
-        .pass-reminder { display: flex; align-items: flex-start; gap: 0.75rem; background: rgba(253,164,175,0.08); border: 1px solid rgba(253,164,175,0.25); padding: 1rem 1.25rem; border-radius: 12px; margin-top: 1.25rem; font-size: 0.92rem; color: var(--slate); }
-        .pass-reminder .sym { color: var(--deep-rose); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
-        /* Checkin grid */
-        .checkin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-top: 1.25rem; }
-        .checkin-option {
-            background: var(--pearl); border: 1.5px solid rgba(253,164,175,0.2);
-            border-radius: 14px; padding: 1.25rem; cursor: pointer;
-            transition: all 0.3s ease; text-align: center;
+        /* Callout */
+        .callout {
+            border-left: 3px solid var(--border);
+            padding: 1rem 1.25rem; margin: 1.5rem 0;
         }
-        .checkin-option:hover, .checkin-option.selected {
-            border-color: var(--primary-rose);
-            box-shadow: 0 4px 18px rgba(253,164,175,0.2);
-            transform: translateY(-3px);
+        .callout.rose { border-left-color: var(--accent); background: var(--accent-bg); }
+        .callout.warm { border-left-color: var(--warm); background: var(--warm-bg); }
+        .callout .callout-label {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-3); margin-bottom: 0.4rem;
         }
-        .checkin-option.selected { background: rgba(253,164,175,0.06); }
-        .checkin-sym { font-size: 1.6rem; margin-bottom: 0.5rem; display: block; }
-        .checkin-label { font-weight: 700; color: var(--midnight); font-size: 0.95rem; margin-bottom: 0.25rem; }
-        .checkin-desc { font-size: 0.83rem; color: var(--slate); line-height: 1.5; }
+        .callout p { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; }
 
-        /* Psych expandable */
-        .psych-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.25rem; margin-top: 1.5rem; }
-        .psych-card { background: var(--pearl); border-radius: 16px; border: 1.5px solid rgba(253,164,175,0.18); overflow: hidden; transition: all 0.3s ease; }
-        .psych-card:hover { border-color: var(--primary-rose); box-shadow: 0 6px 25px rgba(253,164,175,0.15); }
-        .psych-header { padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; user-select: none; }
-        .psych-header-left { display: flex; align-items: center; gap: 0.75rem; }
-        .psych-symbol { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-        .psych-symbol.rose { background: rgba(253,164,175,0.2); color: #e11d48; }
-        .psych-symbol.purple { background: rgba(196,181,253,0.2); color: #7c3aed; }
-        .psych-symbol.peach { background: rgba(253,220,181,0.3); color: #b45309; }
-        .psych-symbol.sage { background: rgba(135,168,120,0.2); color: #4a7c59; }
-        .psych-symbol.blue { background: rgba(147,197,253,0.2); color: #2563eb; }
-        .psych-symbol.amber { background: rgba(252,211,77,0.2); color: #b45309; }
-        .psych-title { font-weight: 700; font-size: 1rem; color: var(--midnight); }
-        .psych-toggle { width: 28px; height: 28px; border-radius: 50%; background: rgba(253,164,175,0.12); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--deep-rose); font-size: 1rem; transition: all 0.3s ease; flex-shrink: 0; }
-        .psych-toggle.open { background: var(--deep-rose); color: white; transform: rotate(45deg); }
-        .psych-body { display: none; padding: 0 1.5rem 1.5rem; color: var(--slate); font-size: 0.95rem; line-height: 1.7; animation: slideUp 0.3s ease both; }
-        .psych-body.open { display: block; }
-        .psych-body ul { list-style: none; margin-top: 0.75rem; }
-        .psych-body ul li { padding: 0.4rem 0 0.4rem 1.25rem; position: relative; }
-        .psych-body ul li::before { content: ''; position: absolute; left: 0; color: var(--primary-rose); font-size: 0.6rem; top: 0.65rem; }
-        .psych-body .insight-block { margin-top: 0.85rem; background: white; border-radius: 10px; padding: 0.85rem; font-size: 0.9rem; border-left: 3px solid var(--primary-rose); }
-
-        /* Discussion */
-        .discussion-stack { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.25rem; }
-        .disc-question { background: linear-gradient(135deg, rgba(253,164,175,0.06) 0%, rgba(196,181,253,0.06) 100%); border: 1.5px solid rgba(253,164,175,0.22); border-radius: 14px; padding: 1.25rem 1.5rem; transition: all 0.3s ease; }
-        .disc-question:hover { border-color: rgba(253,164,175,0.45); transform: translateX(4px); }
-        .disc-q-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.4rem; }
-        .disc-q-text { color: var(--midnight); font-size: 1rem; font-weight: 500; }
-        .disc-q-note { font-size: 0.85rem; color: var(--slate); margin-top: 0.4rem; font-style: italic; }
-
-        /* Checkout */
-        .checkout-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin-top: 1.25rem; }
-        .checkout-option { background: white; border: 2px solid rgba(253,164,175,0.2); border-radius: 14px; padding: 1.25rem; text-align: center; cursor: pointer; transition: all 0.3s ease; }
-        .checkout-option:hover, .checkout-option.selected { border-color: var(--primary-rose); box-shadow: 0 4px 18px rgba(253,164,175,0.2); transform: translateY(-3px); }
-        .checkout-option.selected { background: rgba(253,164,175,0.06); }
-        .checkout-sym { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
-        .checkout-label { font-weight: 700; color: var(--midnight); margin-bottom: 0.25rem; font-size: 0.95rem; }
-        .checkout-desc { font-size: 0.85rem; color: var(--slate); }
-
-        /* Facilitator note */
-        .facilitator-note {
-            background: linear-gradient(135deg, rgba(135,168,120,0.08) 0%, rgba(253,164,175,0.06) 100%);
-            border: 1.5px solid rgba(135,168,120,0.3);
-            border-radius: 14px;
-            padding: 1.25rem 1.5rem;
-            margin-top: 1.5rem;
+        /* Options grid */
+        .options-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+            background: var(--border); border: 1px solid var(--border);
+            border-radius: 8px; overflow: hidden; margin: 1.5rem 0;
         }
-        .facilitator-note .fn-label {
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-            color: #4a7c59; margin-bottom: 0.5rem;
+        .option { background: var(--surface); padding: 1.25rem; cursor: pointer; transition: background 0.15s; }
+        .option:hover { background: var(--bg); }
+        .option.selected { background: var(--accent-bg); }
+        .option-label { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+        .option-desc { font-size: 0.8rem; color: var(--text-3); line-height: 1.5; }
+
+        /* Accordion */
+        .accordion { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .acc-item { border-bottom: 1px solid var(--border); }
+        .acc-item:last-child { border-bottom: none; }
+        .acc-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.25rem; cursor: pointer; background: var(--surface);
+            transition: background 0.15s; user-select: none;
         }
-        .facilitator-note p {
-            color: var(--midnight); font-size: 1rem; font-style: italic; line-height: 1.75;
+        .acc-header:hover { background: var(--bg); }
+        .acc-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .acc-icon { font-size: 1.1rem; color: var(--text-3); transition: transform 0.2s; font-weight: 300; line-height: 1; }
+        .acc-item.open .acc-icon { transform: rotate(45deg); }
+        .acc-body { display: none; padding: 0 1.25rem 1.25rem; background: var(--surface); }
+        .acc-item.open .acc-body { display: block; }
+        .acc-body p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+        .acc-body ul { list-style: none; margin-top: 0.5rem; }
+        .acc-body ul li { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; padding-left: 1rem; position: relative; }
+        .acc-body ul li::before { content: '\00B7'; position: absolute; left: 0; color: var(--text-3); }
+        .acc-body .aside {
+            margin-top: 0.75rem; font-size: 0.85rem; font-style: italic;
+            color: var(--text-3); padding-left: 1rem; border-left: 2px solid var(--border);
         }
 
-        /* Guided practice */
-        .guided-block {
-            background: linear-gradient(135deg, rgba(196,181,253,0.08) 0%, rgba(253,164,175,0.06) 100%);
-            border: 1.5px solid rgba(196,181,253,0.3);
-            border-radius: 16px;
-            padding: 1.75rem;
-            margin-top: 1.5rem;
-        }
-        .guided-block .guided-label {
-            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-            color: #7c3aed; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
-        }
-        .guided-step {
-            display: flex; gap: 0.75rem; margin-bottom: 1rem; align-items: flex-start;
-        }
-        .guided-step:last-child { margin-bottom: 0; }
-        .guided-num {
-            width: 28px; height: 28px; border-radius: 50%; background: rgba(196,181,253,0.2);
-            color: #7c3aed; font-weight: 700; font-size: 0.8rem;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem;
-        }
-        .guided-text { color: var(--slate); font-size: 0.95rem; line-height: 1.7; }
-        .guided-text em { color: var(--midnight); font-style: italic; }
+        /* Numbered steps */
+        .steps { margin: 1.5rem 0; }
+        .step { display: flex; gap: 1rem; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+        .step:last-child { border-bottom: none; }
+        .step-num { font-size: 0.8rem; font-weight: 700; color: var(--text-3); flex-shrink: 0; width: 1.5rem; text-align: right; }
+        .step-content { flex: 1; }
+        .step-q { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .step-hint { font-size: 0.82rem; color: var(--text-3); margin-top: 0.15rem; line-height: 1.6; }
 
-        /* ===== GAMIFIED PRACTICE ===== */
-        .quest-header { text-align: center; margin-bottom: 1.5rem; }
-        .quest-title { font-size: 1.1rem; font-weight: 700; color: var(--midnight); margin-bottom: 0.25rem; }
-        .quest-sub { font-size: 0.88rem; color: var(--slate); }
+        /* Discussion questions */
+        .questions { margin: 1.5rem 0; }
+        .question { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .question:last-child { border-bottom: none; }
+        .question-label {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-3); margin-bottom: 0.3rem;
+        }
+        .question-text { font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.7; }
+        .question-note { font-size: 0.82rem; font-style: italic; color: var(--text-3); margin-top: 0.3rem; }
 
-        /* XP bar */
-        .xp-bar-wrap { background: rgba(253,164,175,0.12); border-radius: 50px; height: 18px; margin: 1.25rem 0; overflow: hidden; position: relative; border: 1px solid rgba(253,164,175,0.25); }
-        .xp-bar-fill { height: 100%; background: var(--gradient-heart); border-radius: 50px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); width: 0%; }
-        .xp-label { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.65rem; font-weight: 700; color: var(--deep-rose); letter-spacing: 0.05em; }
+        /* ---- Compassion Quest (gamified practice) ---- */
+        .quest-progress {
+            display: flex; align-items: center; gap: 0.35rem; margin: 1.5rem 0;
+        }
+        .quest-pip {
+            height: 4px; flex: 1; background: var(--border); border-radius: 2px; transition: background 0.4s;
+        }
+        .quest-pip.done { background: var(--accent); }
+        .quest-pip.active { background: var(--warm); }
 
-        /* Level badges */
-        .level-track { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.75rem; flex-wrap: wrap; }
-        .level-badge {
-            width: 56px; height: 56px; border-radius: 50%; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; font-size: 1.2rem;
-            background: var(--pearl); border: 2.5px solid rgba(253,164,175,0.2);
-            transition: all 0.4s ease; cursor: pointer; position: relative;
+        .level-tabs {
+            display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border);
+            border-radius: 8px; overflow: hidden; margin: 1rem 0 1.5rem;
         }
-        .level-badge .lvl-num { font-size: 0.55rem; font-weight: 700; color: var(--slate); letter-spacing: 0.08em; margin-top: 1px; }
-        .level-badge.active { border-color: var(--deep-rose); background: white; transform: scale(1.15); box-shadow: 0 4px 20px rgba(253,164,175,0.3); }
-        .level-badge.done { border-color: var(--primary-rose); background: rgba(253,164,175,0.1); }
-        .level-badge.done::after { content: '\2713'; position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%; background: var(--deep-rose); color: white; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-        .level-badge.locked { opacity: 0.4; cursor: default; }
-        .level-connector { width: 30px; height: 2px; background: rgba(253,164,175,0.2); align-self: center; border-radius: 2px; }
-        .level-connector.done { background: var(--primary-rose); }
+        .level-tab {
+            flex: 1; padding: 0.75rem 0.5rem; background: var(--surface);
+            border: none; font-family: inherit; font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+            cursor: pointer; transition: background 0.15s, color 0.15s; text-align: center;
+        }
+        .level-tab:hover { background: var(--bg); }
+        .level-tab.active { background: var(--accent-bg); color: var(--accent); }
+        .level-tab.done { color: var(--accent); }
+        .level-tab.locked { opacity: 0.4; cursor: default; }
 
-        /* Quest stages */
-        .quest-stage { display: none; animation: fadeIn 0.5s ease both; }
-        .quest-stage.active { display: block; }
+        .quest-stage { display: none; }
+        .quest-stage.active { display: block; animation: appear 0.25s ease; }
 
-        /* Flip cards for practice */
-        .flip-spread { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
-        .flip-card {
-            width: 140px; height: 200px; perspective: 800px; cursor: pointer; flex-shrink: 0;
+        /* Flip cards */
+        .flip-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+            background: var(--border); border: 1px solid var(--border);
+            border-radius: 8px; overflow: hidden; margin: 1.5rem 0;
         }
-        .flip-inner {
-            position: relative; width: 100%; height: 100%;
-            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
-            transform-style: preserve-3d;
+        .flip-cell {
+            background: var(--surface); padding: 1.5rem 1rem; text-align: center;
+            cursor: pointer; transition: background 0.15s; min-height: 140px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-        .flip-face {
-            position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden; -webkit-backface-visibility: hidden;
-            border-radius: 14px; display: flex; align-items: center;
-            justify-content: center; text-align: center; flex-direction: column; padding: 0.75rem;
+        .flip-cell:hover { background: var(--bg); }
+        .flip-cell.revealed { background: var(--accent-bg); cursor: default; }
+        .flip-cell .fc-hidden {
+            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-3);
         }
-        .flip-back {
-            background: linear-gradient(135deg, #2d2040 0%, #1a1a2e 100%);
-            border: 2px solid rgba(196,181,253,0.3);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        .flip-cell .fc-phrase { display: none; }
+        .flip-cell.revealed .fc-hidden { display: none; }
+        .flip-cell.revealed .fc-phrase { display: block; }
+        .fc-phrase-label {
+            font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
         }
-        .flip-back-glyph { font-size: 2rem; opacity: 0.4; margin-bottom: 0.3rem; }
-        .flip-back-label { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(196,181,253,0.5); }
-        .flip-front {
-            transform: rotateY(180deg);
-            background: white; border: 1.5px solid var(--primary-rose);
-            box-shadow: 0 4px 20px rgba(253,164,175,0.15);
+        .fc-phrase-text {
+            font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 0.35rem;
         }
-        .flip-front .ff-emoji { font-size: 1.4rem; margin-bottom: 0.4rem; }
-        .flip-front .ff-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.3rem; }
-        .flip-front .ff-text { font-size: 0.82rem; color: var(--midnight); font-weight: 600; line-height: 1.35; }
-        .flip-front .ff-hint { font-size: 0.7rem; color: var(--slate); margin-top: 0.4rem; line-height: 1.4; font-style: italic; }
+        .fc-phrase-hint {
+            font-size: 0.78rem; color: var(--text-3); font-style: italic; line-height: 1.5;
+        }
 
         /* Spinner wheel */
-        .wheel-wrap { display: flex; flex-direction: column; align-items: center; margin: 1.5rem 0; }
-        .wheel-container { position: relative; width: 280px; height: 280px; }
-        .wheel-svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.12)); }
+        .wheel-area { text-align: center; margin: 1.5rem 0; }
+        .wheel-box { display: inline-block; position: relative; width: 260px; height: 260px; }
+        .wheel-svg { width: 100%; height: 100%; }
         .wheel-pointer {
-            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            width: 0; height: 0; border-left: 14px solid transparent;
-            border-right: 14px solid transparent; border-top: 22px solid var(--deep-rose);
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); z-index: 2;
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 12px solid transparent;
+            border-right: 12px solid transparent; border-top: 20px solid var(--accent);
+            z-index: 2;
         }
         .spin-btn {
-            margin-top: 1.25rem; padding: 0.8rem 2.5rem; background: var(--gradient-heart);
-            color: white; border: none; border-radius: 50px; font-size: 1rem;
-            font-weight: 700; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 4px 18px rgba(253,164,175,0.35); letter-spacing: 0.03em;
+            margin-top: 1rem; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 6px; font-family: inherit; font-size: 0.85rem; font-weight: 600;
+            color: var(--accent); padding: 0.6rem 2rem; cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
         }
-        .spin-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 25px rgba(253,164,175,0.5); }
-        .spin-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+        .spin-btn:hover { background: var(--accent-bg); border-color: var(--accent); }
+        .spin-btn:disabled { opacity: 0.4; cursor: default; }
         .wheel-result {
-            margin-top: 1.25rem; padding: 1.25rem 1.5rem; background: white;
-            border-radius: 14px; border: 1.5px solid rgba(253,164,175,0.25);
-            text-align: center; display: none; animation: slideUp 0.4s ease both;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-top: 1.25rem; display: none;
+            border-left: 3px solid var(--accent); background: var(--accent-bg);
+            padding: 1.25rem; text-align: left; animation: appear 0.3s ease;
         }
         .wheel-result.show { display: block; }
-        .wr-emoji { font-size: 1.5rem; margin-bottom: 0.4rem; }
-        .wr-who { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.3rem; }
-        .wr-phrase { font-size: 1.1rem; font-weight: 600; color: var(--midnight); line-height: 1.5; margin-bottom: 0.5rem; }
-        .wr-prompt { font-size: 0.88rem; color: var(--slate); font-style: italic; }
+        .wr-label {
+            font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem;
+        }
+        .wr-phrase { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+        .wr-prompt { font-size: 0.88rem; color: var(--text-2); font-style: italic; line-height: 1.6; }
 
         /* Phrase builder */
-        .builder-area { margin: 1.5rem 0; }
-        .builder-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; justify-content: center; }
+        .builder-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .builder-label {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-3); margin-bottom: 0.4rem;
+        }
         .builder-chip {
-            padding: 0.55rem 1.1rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600;
-            cursor: pointer; transition: all 0.25s ease; border: 2px solid rgba(253,164,175,0.2);
-            background: white; color: var(--slate);
+            padding: 0.5rem 1rem; border-radius: 6px; font-family: inherit;
+            font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.15s;
+            border: 1px solid var(--border); background: var(--surface); color: var(--text-2);
         }
-        .builder-chip:hover { border-color: var(--primary-rose); transform: translateY(-2px); }
-        .builder-chip.selected { background: var(--gradient-heart); color: white; border-color: transparent; box-shadow: 0 3px 12px rgba(253,164,175,0.3); }
-        .builder-label { text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 0.5rem; }
+        .builder-chip:hover { background: var(--bg); border-color: var(--text-3); }
+        .builder-chip.selected { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); font-weight: 600; }
         .builder-preview {
-            text-align: center; padding: 1.5rem; background: linear-gradient(135deg, rgba(253,164,175,0.06) 0%, rgba(196,181,253,0.06) 100%);
-            border: 1.5px solid rgba(253,164,175,0.25); border-radius: 16px; margin-top: 1.25rem;
-            min-height: 70px; display: flex; align-items: center; justify-content: center;
+            border-left: 3px solid var(--border); padding: 1.25rem;
+            background: var(--bg); margin-top: 1.25rem; min-height: 60px;
+            display: flex; align-items: center;
         }
-        .builder-preview-text { font-size: 1.2rem; font-weight: 700; color: var(--midnight); line-height: 1.5; }
-        .builder-preview-text.placeholder { color: var(--warm-gray); font-weight: 400; font-size: 0.95rem; }
-
-        /* Complete stage celebration */
-        .stage-complete {
-            text-align: center; padding: 2rem; animation: pop 0.5s ease both;
+        .builder-preview.has-content { border-left-color: var(--accent); }
+        .builder-preview-text { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+        .builder-preview-text.placeholder { color: var(--text-3); font-weight: 400; font-size: 0.9rem; }
+        .lock-btn {
+            margin-top: 1rem; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 6px; font-family: inherit; font-size: 0.85rem; font-weight: 600;
+            color: var(--text-3); padding: 0.6rem 1.5rem; cursor: default;
+            transition: all 0.15s; opacity: 0.4;
         }
-        @keyframes pop { 0% { transform:scale(0.8); opacity:0; } 60% { transform:scale(1.05); } 100% { transform:scale(1); opacity:1; } }
-        .stage-complete .sc-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .stage-complete .sc-title { font-size: 1.2rem; font-weight: 700; color: var(--midnight); margin-bottom: 0.25rem; }
-        .stage-complete .sc-sub { font-size: 0.92rem; color: var(--slate); margin-bottom: 1rem; }
-        .next-level-btn {
-            padding: 0.7rem 2rem; background: var(--gradient-heart); color: white;
-            border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
-            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253,164,175,0.3);
+        .lock-btn.ready { opacity: 1; cursor: pointer; color: var(--accent); border-color: var(--accent); }
+        .lock-btn.ready:hover { background: var(--accent-bg); }
+
+        /* Stage complete */
+        .stage-done {
+            display: none; padding: 1.25rem; border-left: 3px solid var(--accent);
+            background: var(--accent-bg); margin-top: 1.5rem;
         }
-        .next-level-btn:hover { transform: translateY(-2px); }
-
-        .btn { padding: 0.75rem 2rem; background: var(--gradient-heart); color: white; border: none; border-radius: 50px; font-size: 0.97rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(253,164,175,0.3); }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(253,164,175,0.42); }
-        .btn-secondary { background: white; color: var(--deep-rose); border: 2px solid var(--primary-rose); box-shadow: none; margin-left: 0.75rem; }
-        .btn-secondary:hover { background: rgba(253,164,175,0.07); }
-
-        .crisis-footer { margin-top: 3rem; padding: 1.5rem 2rem; background: white; border-radius: 16px; border: 1px solid rgba(253,164,175,0.2); text-align: center; font-size: 0.88rem; color: var(--slate); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .crisis-footer strong { color: var(--midnight); }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 1rem; }
-            .card { padding: 1.5rem; }
-            .nav-pill { padding: 0.55rem 1.1rem; font-size: 0.85rem; }
+        .stage-done.show { display: block; animation: appear 0.3s ease; }
+        .stage-done p { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; }
+        .stage-done strong { color: var(--text); }
+        .next-btn {
+            margin-top: 0.75rem; background: none; border: none; font-family: inherit;
+            font-size: 0.88rem; font-weight: 600; color: var(--accent); cursor: pointer;
+            padding: 0; transition: opacity 0.15s;
         }
+        .next-btn:hover { opacity: 0.7; }
+
+        /* Page nav */
+        .page-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+        }
+        .page-nav button {
+            background: none; border: none; font-family: inherit; font-size: 0.9rem;
+            font-weight: 500; color: var(--accent); cursor: pointer; padding: 0.5rem 0;
+            transition: opacity 0.15s;
+        }
+        .page-nav button:hover { opacity: 0.7; }
+        .page-nav .ghost { visibility: hidden; }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+            text-align: center; font-size: 0.8rem; color: var(--text-3); line-height: 1.8;
+        }
+        .footer strong { color: var(--text-2); font-weight: 600; }
+
+        @media (max-width: 600px) {
+            .container { padding: 2rem 1.25rem 3rem; }
+            h1 { font-size: 1.8rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .flip-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
@@ -374,789 +338,662 @@
 </head>
 <body>
 
-    <div class="bg-shape bg-1"></div>
-    <div class="bg-shape bg-2"></div>
-    <div class="bg-shape bg-3"></div>
+<div class="container">
 
-    <div class="container">
+    <header class="header">
+        <div class="header-label">Adolescent Recovery Group</div>
+        <h1>Compassion & Loving-Kindness</h1>
+        <p class="subtitle">Turning toward yourself the way you'd turn toward a friend</p>
+    </header>
 
-        <div class="header">
-            <div class="header-eyebrow">Adolescent Recovery Group</div>
-            <h1>Compassion &amp; Loving-Kindness</h1>
-            <p class="subtitle">Turning toward yourself the way you'd turn toward a friend</p>
+    <nav class="nav">
+        <button class="active" onclick="showPage(0, this)">Welcome</button>
+        <button onclick="showPage(1, this)">The Skills</button>
+        <button onclick="showPage(2, this)">Practice</button>
+        <button onclick="showPage(3, this)">Discussion</button>
+        <button onclick="showPage(4, this)">Closing</button>
+    </nav>
+
+
+    <!-- ======================== WELCOME ======================== -->
+    <div class="page active">
+
+        <div class="section-label rose">Welcome</div>
+        <h2><span class="timing">5 to 8 min</span>About today's group</h2>
+        <p class="body-text">
+            Today we're talking about compassion. Not the greeting card kind. The kind that lets you look at yourself honestly without cruelty. The kind that makes recovery actually sustainable.
+        </p>
+        <p class="body-text">
+            Here's the thing about self-criticism: it pretends to be useful. It says "I'm keeping you in line" and "without me you'd fall apart." The research says otherwise. Self-criticism activates the same threat circuitry as being attacked by someone else. You can't heal in a body that's at war with itself.
+        </p>
+
+        <div class="callout" style="margin-top: 1.5rem;">
+            <div class="callout-label">Confidentiality</div>
+            <p>
+                What's shared here stays here. Names, stories, details. All protected. The one exception
+                is safety: if there's risk of harm, that changes things. Outside of that, this space is yours.
+            </p>
         </div>
 
-        <div class="nav-pills">
-            <button class="nav-pill active" onclick="showPage(0, this)">Welcome</button>
-            <button class="nav-pill" onclick="showPage(1, this)">The Skills</button>
-            <button class="nav-pill" onclick="showPage(2, this)">Practice</button>
-            <button class="nav-pill" onclick="showPage(3, this)">Discussion</button>
-            <button class="nav-pill" onclick="showPage(4, this)">Closing</button>
+        <div class="callout">
+            <p>
+                <strong>You can pass at any point.</strong> No explanation needed.
+                If something doesn't fit right now, say "pass" and we move on.
+            </p>
         </div>
 
-        <div class="phase-track">
-            <div class="phase-dot active" onclick="showPage(0)"></div>
-            <div class="phase-dot" onclick="showPage(1)"></div>
-            <div class="phase-dot" onclick="showPage(2)"></div>
-            <div class="phase-dot" onclick="showPage(3)"></div>
-            <div class="phase-dot" onclick="showPage(4)"></div>
+        <hr class="divider">
+
+        <div class="section-label">Check-in</div>
+        <h2><span class="timing">8 to 10 min</span>Getting into it</h2>
+        <p class="body-text" style="margin-bottom: 1rem;">Share your name, then pick one.</p>
+
+        <div class="options-grid">
+            <div class="option" onclick="select(this)">
+                <div class="option-label">One word</div>
+                <div class="option-desc">How you arrived today</div>
+            </div>
+            <div class="option" onclick="select(this)">
+                <div class="option-label">Something kind</div>
+                <div class="option-desc">The last kind thing someone did for you, or you did for someone</div>
+            </div>
+            <div class="option" onclick="select(this)">
+                <div class="option-label">1 to 10</div>
+                <div class="option-desc">How hard is it to be kind to yourself today?</div>
+            </div>
+            <div class="option" onclick="select(this)">
+                <div class="option-label">Pass</div>
+                <div class="option-desc">You're here, and that counts</div>
+            </div>
         </div>
 
+        <div class="page-nav">
+            <button class="ghost">&larr; Back</button>
+            <button onclick="showPage(1)">The Skills &rarr;</button>
+        </div>
+    </div>
 
-        <!-- ======== PAGE 0: WELCOME ======== -->
-        <div class="page active" id="page0">
 
-            <div class="card">
-                <h2>
-                    <div class="icon-circle icon-heart">&#x1F44B;</div>
-                    Welcome
-                    <span class="timing-badge">5-8 min</span>
-                </h2>
+    <!-- ======================== THE SKILLS ======================== -->
+    <div class="page">
 
-                <div class="confidentiality-block">
-                    <div class="conf-label">&#x1F512; Confidentiality</div>
-                    <p>
-                        What's shared here stays here. Everything in this group is confidential.
-                        Names, stories, details &mdash; protected. The one exception is safety: if there's risk of harm,
-                        that changes things. Outside of that, this space is yours.
-                    </p>
+        <div class="section-label rose">The concept</div>
+        <h2><span class="timing">20 to 25 min</span>Self-compassion and loving-kindness</h2>
+        <p class="body-text">
+            Self-compassion is treating yourself the way you'd treat a friend who's struggling. Not with pity. Not with a pep talk. With honesty and warmth at the same time.
+        </p>
+
+        <div class="accordion" style="margin-top: 1.5rem;">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">The three components</div>
+                    <div class="acc-icon">+</div>
                 </div>
-
-                <div class="pass-reminder">
-                    <span class="sym">&#x1F90D;</span>
-                    <div>
-                        <strong>You can pass at any point.</strong> No explanation needed.
-                        If something doesn't fit right now, just say "pass" and we move on.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card warm">
-                <h2>
-                    <div class="icon-circle icon-warm">&#x1F331;</div>
-                    Check-In
-                    <span class="timing-badge">8-10 min</span>
-                </h2>
-                <p style="color:var(--slate); margin-bottom:1.25rem; line-height:1.8;">
-                    Share your name and one of the following. Take what fits. Leave the rest.
-                </p>
-
-                <div class="checkin-grid">
-                    <div class="checkin-option" onclick="selectCheckin(this)">
-                        <span class="checkin-sym">&#x1F4AC;</span>
-                        <div class="checkin-label">One word</div>
-                        <div class="checkin-desc">How you arrived today</div>
-                    </div>
-                    <div class="checkin-option" onclick="selectCheckin(this)">
-                        <span class="checkin-sym">&#x1F497;</span>
-                        <div class="checkin-label">Something kind</div>
-                        <div class="checkin-desc">The last kind thing someone did for you, or you did for someone</div>
-                    </div>
-                    <div class="checkin-option" onclick="selectCheckin(this)">
-                        <span class="checkin-sym">&#x1F9CA;</span>
-                        <div class="checkin-label">Hard to be kind to yourself?</div>
-                        <div class="checkin-desc">Rate it 1-10 today</div>
-                    </div>
-                    <div class="checkin-option" onclick="selectCheckin(this)">
-                        <span class="checkin-sym">&#x1F90D;</span>
-                        <div class="checkin-label">Pass</div>
-                        <div class="checkin-desc">You're here, and that counts</div>
-                    </div>
+                <div class="acc-body">
+                    <p>Self-compassion has three parts. All connected, each one doing different work.</p>
+                    <ul>
+                        <li><strong>Self-kindness</strong> &mdash; meeting your own pain with gentleness instead of criticism</li>
+                        <li><strong>Common humanity</strong> &mdash; remembering that suffering and imperfection are shared, not signs that something is uniquely wrong with you</li>
+                        <li><strong>Mindfulness</strong> &mdash; holding your experience in awareness without over-identifying with it or pushing it away</li>
+                    </ul>
+                    <div class="aside">Self-compassion is not letting yourself off the hook. It's giving yourself enough stability to actually look at what's happening. You can't change what you refuse to face gently.</div>
                 </div>
             </div>
-
-            <div style="text-align:right;">
-                <button class="btn" onclick="showPage(1)">The Skills &rarr;</button>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">The self-criticism trap</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Most of us learned early that being hard on ourselves is motivating. That self-criticism keeps us in line. The research says the opposite.</p>
+                    <ul>
+                        <li>Self-criticism activates the <strong>threat system</strong> in your brain &mdash; the same circuitry as being attacked by someone else</li>
+                        <li>When you're in threat mode, your brain narrows. Creativity, problem-solving, and openness shut down</li>
+                        <li>In recovery, self-criticism often fuels the cycle it claims to interrupt. Shame doesn't motivate change &mdash; it motivates hiding</li>
+                    </ul>
+                    <div class="aside">The voice that says "you should be further along by now" is not helping you get further. It's keeping you stuck in the same loop.</div>
+                </div>
             </div>
-
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Common humanity</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Suffering feels isolating. Part of the pain is the story that you're the only one, that everyone else has it figured out, that your struggle means something is fundamentally broken in you.</p>
+                    <ul>
+                        <li>Common humanity doesn't minimize your pain. It places it in context</li>
+                        <li>Everyone in this room knows what it's like to fight their own mind</li>
+                        <li>Struggle is not evidence of failure. It's evidence of being human</li>
+                    </ul>
+                    <div class="aside">The most isolating thought in recovery is "no one else gets this." Common humanity is the antidote: not that everyone's story is the same, but that no one is doing this alone.</div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Loving-kindness: what it means</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Loving-kindness is the deliberate practice of wishing well &mdash; first toward people you care about, then toward yourself, then outward. It's not about forcing a feeling. It's about planting a seed.</p>
+                    <ul>
+                        <li>It's a <strong>practice</strong>, not a state. You don't have to feel it right away</li>
+                        <li>The phrases are simple: "May you be safe. May you be happy. May you be healthy. May you live with ease."</li>
+                        <li>In recovery, directing these phrases toward yourself is often the hardest part &mdash; and the most important</li>
+                    </ul>
+                    <div class="aside">You don't have to believe the phrases yet. You just have to be willing to say them. Willingness is the door compassion walks through.</div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Compassion in recovery</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Recovery asks you to do incredibly hard things: tolerate discomfort, break patterns, sit with feelings that used to be unbearable. Self-compassion makes that possible without burning out.</p>
+                    <ul>
+                        <li><strong>Slips are not failures</strong> &mdash; compassion lets you come back without the shame spiral that makes slips worse</li>
+                        <li><strong>Hard days are data</strong> &mdash; compassion helps you look at what happened with curiosity instead of contempt</li>
+                        <li><strong>You can hold yourself accountable and be kind to yourself at the same time</strong> &mdash; these are not opposites</li>
+                    </ul>
+                    <div class="aside">Recovery sustained by self-hatred is fragile. Recovery sustained by self-compassion has roots.</div>
+                </div>
+            </div>
         </div>
 
+        <div class="page-nav">
+            <button onclick="showPage(0)">&larr; Welcome</button>
+            <button onclick="showPage(2)">Practice &rarr;</button>
+        </div>
+    </div>
 
-        <!-- ======== PAGE 1: THE SKILLS ======== -->
-        <div class="page" id="page1">
 
-            <div class="card">
-                <h2>
-                    <div class="icon-circle icon-heart">&#x1F49B;</div>
-                    Compassion &amp; Loving-Kindness
-                    <span class="timing-badge">20-25 min</span>
-                </h2>
-                <p style="color:var(--slate); line-height:1.8; margin-bottom:0.5rem;">
-                    These are core concepts connecting self-compassion to recovery.
-                    Tap any card to open it. You don't have to go in order.
-                </p>
-                <div class="pass-reminder" style="margin-top:0.75rem;">
-                    <span class="sym">&#x1F90D;</span>
-                    <div>Read together, or take turns. Either works. Pace the group as needed.</div>
-                </div>
+    <!-- ======================== PRACTICE ======================== -->
+    <div class="page">
 
-                <div class="psych-grid">
+        <div class="section-label warm">Practice</div>
+        <h2><span class="timing">15 to 20 min</span>The compassion quest</h2>
+        <p class="body-text">
+            Four levels. Each one stretches your compassion a little further. Start easy, build from there.
+        </p>
 
-                    <!-- Card 1 -->
-                    <div class="psych-card">
-                        <div class="psych-header" onclick="togglePsych(this)">
-                            <div class="psych-header-left">
-                                <div class="psych-symbol rose">&#x1F9E1;</div>
-                                <div class="psych-title">What self-compassion actually is</div>
-                            </div>
-                            <button class="psych-toggle" tabindex="-1">+</button>
-                        </div>
-                        <div class="psych-body">
-                            <p>
-                                Self-compassion is treating yourself the way you'd treat a friend who's struggling.
-                                Not with pity. Not with a pep talk. With honesty and warmth at the same time.
-                            </p>
-                            <ul>
-                                <li><strong>Self-kindness</strong> &mdash; meeting your own pain with gentleness instead of criticism</li>
-                                <li><strong>Common humanity</strong> &mdash; remembering that suffering and imperfection are shared, not signs that something is uniquely wrong with you</li>
-                                <li><strong>Mindfulness</strong> &mdash; holding your experience in awareness without over-identifying with it or pushing it away</li>
-                            </ul>
-                            <div class="insight-block">
-                                Self-compassion is not letting yourself off the hook. It's giving yourself enough stability to actually look at what's happening.
-                                You can't change what you refuse to face gently.
-                            </div>
-                        </div>
-                    </div>
+        <div class="quest-progress" id="questProgress">
+            <div class="quest-pip active"></div>
+            <div class="quest-pip"></div>
+            <div class="quest-pip"></div>
+            <div class="quest-pip"></div>
+        </div>
 
-                    <!-- Card 2 -->
-                    <div class="psych-card">
-                        <div class="psych-header" onclick="togglePsych(this)">
-                            <div class="psych-header-left">
-                                <div class="psych-symbol purple">&#x1F9E0;</div>
-                                <div class="psych-title">The self-criticism trap</div>
-                            </div>
-                            <button class="psych-toggle" tabindex="-1">+</button>
-                        </div>
-                        <div class="psych-body">
-                            <p>
-                                Most of us learned early that being hard on ourselves is motivating. That self-criticism keeps us in line. The research says the opposite.
-                            </p>
-                            <ul>
-                                <li>Self-criticism activates the <strong>threat system</strong> in your brain &mdash; the same circuitry as being attacked by someone else</li>
-                                <li>When you're in threat mode, your brain narrows. Creativity, problem-solving, and openness shut down</li>
-                                <li>In recovery, self-criticism often fuels the cycle it claims to interrupt. Shame doesn't motivate change &mdash; it motivates hiding</li>
-                            </ul>
-                            <div class="insight-block" style="border-left-color: var(--gentle-lavender);">
-                                The voice that says "you should be further along by now" is not helping you get further.
-                                It's keeping you stuck in the same loop.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="psych-card">
-                        <div class="psych-header" onclick="togglePsych(this)">
-                            <div class="psych-header-left">
-                                <div class="psych-symbol blue">&#x1F30D;</div>
-                                <div class="psych-title">Common humanity</div>
-                            </div>
-                            <button class="psych-toggle" tabindex="-1">+</button>
-                        </div>
-                        <div class="psych-body">
-                            <p>
-                                Suffering feels isolating. Part of the pain is the story that you're the only one, that everyone else has it figured out, that your struggle means something is fundamentally broken in you.
-                            </p>
-                            <ul>
-                                <li>Common humanity doesn't minimize your pain. It places it in context</li>
-                                <li>Everyone in this room knows what it's like to fight their own mind</li>
-                                <li>Struggle is not evidence of failure. It's evidence of being human</li>
-                            </ul>
-                            <div class="insight-block" style="border-left-color: var(--calm-blue);">
-                                The most isolating thought in recovery is "no one else gets this."
-                                Common humanity is the antidote: not that everyone's story is the same, but that no one is doing this alone.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="psych-card">
-                        <div class="psych-header" onclick="togglePsych(this)">
-                            <div class="psych-header-left">
-                                <div class="psych-symbol peach">&#x1F525;</div>
-                                <div class="psych-title">Loving-kindness: what it means</div>
-                            </div>
-                            <button class="psych-toggle" tabindex="-1">+</button>
-                        </div>
-                        <div class="psych-body">
-                            <p>
-                                Loving-kindness (metta) is the deliberate practice of wishing well &mdash; first toward people you care about, then toward yourself, then outward. It's not about forcing a feeling. It's about planting a seed.
-                            </p>
-                            <ul>
-                                <li>It's a <strong>practice</strong>, not a state. You don't have to feel it right away</li>
-                                <li>The phrases are simple: "May you be safe. May you be happy. May you be healthy. May you live with ease."</li>
-                                <li>In recovery, directing these phrases toward yourself is often the hardest part &mdash; and the most important</li>
-                            </ul>
-                            <div class="insight-block" style="border-left-color: var(--warm-peach);">
-                                You don't have to believe the phrases yet. You just have to be willing to say them. Willingness is the door compassion walks through.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div class="psych-card">
-                        <div class="psych-header" onclick="togglePsych(this)">
-                            <div class="psych-header-left">
-                                <div class="psych-symbol sage">&#x1F331;</div>
-                                <div class="psych-title">Compassion in recovery</div>
-                            </div>
-                            <button class="psych-toggle" tabindex="-1">+</button>
-                        </div>
-                        <div class="psych-body">
-                            <p>
-                                Recovery asks you to do incredibly hard things: tolerate discomfort, break patterns, sit with feelings that used to be unbearable. Self-compassion makes that possible without burning out.
-                            </p>
-                            <ul>
-                                <li><strong>Slips are not failures</strong> &mdash; compassion lets you come back without the shame spiral that makes slips worse</li>
-                                <li><strong>Hard days are data</strong> &mdash; compassion helps you look at what happened with curiosity instead of contempt</li>
-                                <li><strong>You can hold yourself accountable and be kind to yourself at the same time</strong> &mdash; these are not opposites</li>
-                            </ul>
-                            <div class="insight-block" style="border-left-color: var(--sage);">
-                                Recovery sustained by self-hatred is fragile. Recovery sustained by self-compassion has roots.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-                <button class="btn btn-secondary" onclick="showPage(0)" style="margin-left:0;">&larr; Welcome</button>
-                <button class="btn" onclick="showPage(2)">Practice &rarr;</button>
-            </div>
-
+        <div class="level-tabs" id="levelTabs">
+            <button class="level-tab active" onclick="goToStage(0)">1 &middot; Someone easy</button>
+            <button class="level-tab locked" onclick="goToStage(1)">2 &middot; Yourself</button>
+            <button class="level-tab locked" onclick="goToStage(2)">3 &middot; Build your own</button>
+            <button class="level-tab locked" onclick="goToStage(3)">4 &middot; The group</button>
         </div>
 
 
-        <!-- ======== PAGE 2: GAMIFIED PRACTICE ======== -->
-        <div class="page" id="page2">
+        <!-- STAGE 0: Someone easy -->
+        <div class="quest-stage active" id="stage0">
+            <h3>Send it to someone easy</h3>
+            <p class="body-text">Think of someone whose warmth you can feel. A person, a pet, anyone. Tap each card to reveal a phrase. Direct it toward them.</p>
 
-            <div class="card calm">
-                <h2>
-                    <div class="icon-circle icon-calm">&#x1F3AE;</div>
-                    The Compassion Quest
-                    <span class="timing-badge">15-20 min</span>
-                </h2>
-
-                <div class="quest-header">
-                    <div class="quest-sub">Four levels. Each one stretches your compassion a little further. Go at the group's pace.</div>
-                </div>
-
-                <div class="xp-bar-wrap">
-                    <div class="xp-bar-fill" id="xpBar"></div>
-                    <div class="xp-label" id="xpLabel">0 / 4</div>
-                </div>
-
-                <div class="level-track" id="levelTrack">
-                    <div class="level-badge active" onclick="goToStage(0)" id="lvl0">&#x1F49B;<div class="lvl-num">LVL 1</div></div>
-                    <div class="level-connector" id="conn0"></div>
-                    <div class="level-badge locked" onclick="goToStage(1)" id="lvl1">&#x1F30A;<div class="lvl-num">LVL 2</div></div>
-                    <div class="level-connector" id="conn1"></div>
-                    <div class="level-badge locked" onclick="goToStage(2)" id="lvl2">&#x1F525;<div class="lvl-num">LVL 3</div></div>
-                    <div class="level-connector" id="conn2"></div>
-                    <div class="level-badge locked" onclick="goToStage(3)" id="lvl3">&#x1F31F;<div class="lvl-num">LVL 4</div></div>
-                </div>
-
-                <!-- ===== STAGE 0: Card Draw — Someone You Care About ===== -->
-                <div class="quest-stage active" id="stage0">
-                    <div class="quest-title">Level 1: Send It to Someone Easy</div>
-                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">Flip a card to reveal a loving-kindness phrase. Direct it toward someone you care about.</div>
-                    <div class="pass-reminder" style="margin-top:0;">
-                        <span class="sym">&#x1F90D;</span>
-                        <div>Think of a person or pet whose warmth you can feel. Hold them in your mind.</div>
-                    </div>
-
-                    <div class="flip-spread" id="flipSpread0">
-                        <div class="flip-card" onclick="flipCard(this,0)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
-                                <div class="flip-face flip-front"><div class="ff-emoji">&#x1F9E1;</div><div class="ff-label">Safe</div><div class="ff-text">May you be safe.</div><div class="ff-hint">Protected. Held. Out of harm's way.</div></div>
-                            </div>
-                        </div>
-                        <div class="flip-card" onclick="flipCard(this,0)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
-                                <div class="flip-face flip-front"><div class="ff-emoji">&#x2728;</div><div class="ff-label">Happy</div><div class="ff-text">May you be happy.</div><div class="ff-hint">Not performing happiness. Actually feeling it.</div></div>
-                            </div>
-                        </div>
-                        <div class="flip-card" onclick="flipCard(this,0)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
-                                <div class="flip-face flip-front"><div class="ff-emoji">&#x1F33F;</div><div class="ff-label">Healthy</div><div class="ff-text">May you be healthy.</div><div class="ff-hint">In body, in mind, in the way you treat yourself.</div></div>
-                            </div>
-                        </div>
-                        <div class="flip-card" onclick="flipCard(this,0)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back"><div class="flip-back-glyph">&#x2661;</div><div class="flip-back-label">Draw</div></div>
-                                <div class="flip-face flip-front"><div class="ff-emoji">&#x1F54A;</div><div class="ff-label">At Ease</div><div class="ff-text">May you live with ease.</div><div class="ff-hint">Not striving. Not bracing. Just being.</div></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stage-complete" id="complete0" style="display:none;">
-                        <div class="sc-emoji">&#x1F49B;</div>
-                        <div class="sc-title">Level 1 Complete</div>
-                        <div class="sc-sub">You offered kindness to someone you care about. That's where it starts.</div>
-                        <button class="next-level-btn" onclick="unlockStage(1)">Unlock Level 2 &rarr;</button>
+            <div class="flip-grid" id="flipGrid0">
+                <div class="flip-cell" onclick="flipCell(this, 0)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Safe</div>
+                        <div class="fc-phrase-text">May you be safe.</div>
+                        <div class="fc-phrase-hint">Protected. Held. Out of harm's way.</div>
                     </div>
                 </div>
-
-                <!-- ===== STAGE 1: Spin the Wheel — Toward Yourself ===== -->
-                <div class="quest-stage" id="stage1">
-                    <div class="quest-title">Level 2: Turn It Toward Yourself</div>
-                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">This is the hard part. Spin the wheel. Whatever it lands on, try saying it to yourself — silently or out loud.</div>
-
-                    <div class="wheel-wrap">
-                        <div class="wheel-container">
-                            <div class="wheel-pointer"></div>
-                            <svg class="wheel-svg" viewBox="0 0 280 280" id="wheelSvg">
-                                <g id="wheelGroup" style="transform-origin:140px 140px; transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99);">
-                                </g>
-                                <circle cx="140" cy="140" r="22" fill="white" stroke="rgba(253,164,175,0.3)" stroke-width="2"/>
-                                <text x="140" y="145" text-anchor="middle" font-size="16" fill="#E11D48">&#x2661;</text>
-                            </svg>
-                        </div>
-                        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin</button>
-                    </div>
-
-                    <div class="wheel-result" id="wheelResult">
-                        <div class="wr-emoji" id="wrEmoji"></div>
-                        <div class="wr-who">For You</div>
-                        <div class="wr-phrase" id="wrPhrase"></div>
-                        <div class="wr-prompt" id="wrPrompt"></div>
-                    </div>
-
-                    <div class="stage-complete" id="complete1" style="display:none;">
-                        <div class="sc-emoji">&#x1F30A;</div>
-                        <div class="sc-title">Level 2 Complete</div>
-                        <div class="sc-sub">You turned kindness toward yourself. That takes real courage.</div>
-                        <button class="next-level-btn" onclick="unlockStage(2)">Unlock Level 3 &rarr;</button>
+                <div class="flip-cell" onclick="flipCell(this, 0)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Happy</div>
+                        <div class="fc-phrase-text">May you be happy.</div>
+                        <div class="fc-phrase-hint">Not performing it. Actually feeling it.</div>
                     </div>
                 </div>
-
-                <!-- ===== STAGE 2: Phrase Builder — Customize Your Own ===== -->
-                <div class="quest-stage" id="stage2">
-                    <div class="quest-title">Level 3: Build Your Own Phrase</div>
-                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">The classic phrases don't always land. Build one that your system can actually receive right now.</div>
-
-                    <div class="builder-area">
-                        <div class="builder-label">Start with...</div>
-                        <div class="builder-row" id="builderRow0">
-                            <div class="builder-chip" onclick="selectChip(this,0)">May I</div>
-                            <div class="builder-chip" onclick="selectChip(this,0)">I deserve</div>
-                            <div class="builder-chip" onclick="selectChip(this,0)">It's okay to</div>
-                            <div class="builder-chip" onclick="selectChip(this,0)">I'm allowed to</div>
-                        </div>
-
-                        <div class="builder-label">Then...</div>
-                        <div class="builder-row" id="builderRow1">
-                            <div class="builder-chip" onclick="selectChip(this,1)">be okay today</div>
-                            <div class="builder-chip" onclick="selectChip(this,1)">rest without earning it</div>
-                            <div class="builder-chip" onclick="selectChip(this,1)">take up space</div>
-                            <div class="builder-chip" onclick="selectChip(this,1)">not have it figured out</div>
-                            <div class="builder-chip" onclick="selectChip(this,1)">feel what I feel</div>
-                            <div class="builder-chip" onclick="selectChip(this,1)">be kind to myself</div>
-                        </div>
-
-                        <div class="builder-label">Add a closer (optional)...</div>
-                        <div class="builder-row" id="builderRow2">
-                            <div class="builder-chip" onclick="selectChip(this,2)">even when it's hard</div>
-                            <div class="builder-chip" onclick="selectChip(this,2)">without proving anything</div>
-                            <div class="builder-chip" onclick="selectChip(this,2)">right now</div>
-                            <div class="builder-chip" onclick="selectChip(this,2)">just as I am</div>
-                        </div>
-
-                        <div class="builder-preview" id="builderPreview">
-                            <div class="builder-preview-text placeholder" id="builderText">Your phrase will appear here...</div>
-                        </div>
-                    </div>
-
-                    <div style="text-align:center; margin-top:1rem;">
-                        <button class="next-level-btn" id="builderDone" onclick="completeBuilder()" style="opacity:0.4; pointer-events:none;">Lock It In &#x1F512;</button>
-                    </div>
-
-                    <div class="stage-complete" id="complete2" style="display:none;">
-                        <div class="sc-emoji">&#x1F525;</div>
-                        <div class="sc-title">Level 3 Complete</div>
-                        <div class="sc-sub">You made it yours. That phrase belongs to you now.</div>
-                        <button class="next-level-btn" onclick="unlockStage(3)">Unlock Level 4 &rarr;</button>
+                <div class="flip-cell" onclick="flipCell(this, 0)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Healthy</div>
+                        <div class="fc-phrase-text">May you be healthy.</div>
+                        <div class="fc-phrase-hint">In body, in mind, in how you treat yourself.</div>
                     </div>
                 </div>
-
-                <!-- ===== STAGE 3: Send It to the Group ===== -->
-                <div class="quest-stage" id="stage3">
-                    <div class="quest-title">Level 4: Expand Outward</div>
-                    <div class="quest-sub" style="text-align:center; margin-bottom:0.5rem;">Now send it to the people in this room. Everyone here is fighting their own battle. Flip the cards together.</div>
-
-                    <div class="flip-spread" id="flipSpread3">
-                        <div class="flip-card" onclick="flipCard(this,3)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
-                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x1F6E1;</div><div class="ff-label">Safety</div><div class="ff-text">May we be safe.</div><div class="ff-hint">All of us. In this room and beyond it.</div></div>
-                            </div>
-                        </div>
-                        <div class="flip-card" onclick="flipCard(this,3)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
-                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x2600;</div><div class="ff-label">Joy</div><div class="ff-text">May we be happy.</div><div class="ff-hint">Not the performance. The real thing.</div></div>
-                            </div>
-                        </div>
-                        <div class="flip-card" onclick="flipCard(this,3)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
-                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x1F33F;</div><div class="ff-label">Health</div><div class="ff-text">May we be healthy.</div><div class="ff-hint">Recovery is health. Showing up is health.</div></div>
-                            </div>
-                        </div>
-                        <div class="flip-card" onclick="flipCard(this,3)">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-back" style="background:linear-gradient(135deg,#1a2e1a 0%,#1a1a2e 100%); border-color:rgba(135,168,120,0.3);"><div class="flip-back-glyph">&#x1F91D;</div><div class="flip-back-label">Together</div></div>
-                                <div class="flip-face flip-front" style="border-color:var(--sage);"><div class="ff-emoji">&#x1F54A;</div><div class="ff-label">Ease</div><div class="ff-text">May we live with ease.</div><div class="ff-hint">No one in this room has to do this alone.</div></div>
-                            </div>
-                        </div>
+                <div class="flip-cell" onclick="flipCell(this, 0)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">At ease</div>
+                        <div class="fc-phrase-text">May you live with ease.</div>
+                        <div class="fc-phrase-hint">Not striving. Not bracing. Just being.</div>
                     </div>
-
-                    <div class="stage-complete" id="complete3" style="display:none;">
-                        <div class="sc-emoji">&#x1F31F;</div>
-                        <div class="sc-title">Quest Complete</div>
-                        <div class="sc-sub">You went from someone easy, to yourself, to building your own phrase, to sending it outward. That's the whole practice.</div>
-                    </div>
-                </div>
-
-                <div class="facilitator-note" style="margin-top:2rem;">
-                    <div class="fn-label">Facilitator Note</div>
-                    <p>
-                        Some teens will resist directing kindness toward themselves. That resistance is information, not failure.
-                        Name it gently: "If that was hard, you're not doing it wrong. That's actually the whole point of practicing."
-                    </p>
                 </div>
             </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-                <button class="btn btn-secondary" onclick="showPage(1)" style="margin-left:0;">&larr; The Skills</button>
-                <button class="btn" onclick="showPage(3)">Discussion &rarr;</button>
+            <div class="stage-done" id="done0">
+                <p><strong>Level 1 complete.</strong> You offered kindness to someone you care about. That's where it starts.</p>
+                <button class="next-btn" onclick="unlockStage(1)">Continue to level 2 &rarr;</button>
             </div>
-
         </div>
 
 
-        <!-- ======== PAGE 3: DISCUSSION ======== -->
-        <div class="page" id="page3">
+        <!-- STAGE 1: Yourself (wheel) -->
+        <div class="quest-stage" id="stage1">
+            <h3>Turn it toward yourself</h3>
+            <p class="body-text">This is the hard part. Spin the wheel. Whatever it lands on, try saying it to yourself &mdash; silently or out loud.</p>
 
-            <div class="card earth">
-                <h2>
-                    <div class="icon-circle icon-earth">&#x1F5E3;</div>
-                    Discussion
-                    <span class="timing-badge">15-20 min</span>
-                </h2>
-                <p style="color:var(--slate); margin-bottom:0.5rem; line-height:1.8;">
-                    These questions are meant to open things up, not have right answers.
-                    Let the conversation go where it needs to go.
-                </p>
-
-                <div class="discussion-stack">
-
-                    <div class="disc-question">
-                        <div class="disc-q-label">Opening</div>
-                        <div class="disc-q-text">What was it like to direct those phrases toward yourself? What came up?</div>
-                        <div class="disc-q-note">Normalize that it feels weird, awkward, or even painful. That's common.</div>
-                    </div>
-
-                    <div class="disc-question">
-                        <div class="disc-q-label">Self-Kindness</div>
-                        <div class="disc-q-text">If your best friend were going through exactly what you're going through right now, what would you say to them? Why is it so much harder to say that to yourself?</div>
-                    </div>
-
-                    <div class="disc-question">
-                        <div class="disc-q-label">The Critic</div>
-                        <div class="disc-q-text">What does your self-critical voice sound like? Does it sound like anyone? Where do you think it learned that tone?</div>
-                        <div class="disc-q-note">Some teens recognize a parent, coach, or social voice. Let them name it without pressure.</div>
-                    </div>
-
-                    <div class="disc-question">
-                        <div class="disc-q-label">Common Humanity</div>
-                        <div class="disc-q-text">What's something about your struggle that you assumed was just yours &mdash; until you realized other people go through it too?</div>
-                    </div>
-
-                    <div class="disc-question">
-                        <div class="disc-q-label">Recovery Connection</div>
-                        <div class="disc-q-text">How does the way you talk to yourself affect your recovery? What happens on the days when you're hardest on yourself?</div>
-                    </div>
-
+            <div class="wheel-area">
+                <div class="wheel-box">
+                    <div class="wheel-pointer"></div>
+                    <svg class="wheel-svg" viewBox="0 0 260 260" id="wheelSvg">
+                        <g id="wheelGroup" style="transform-origin:130px 130px; transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99);"></g>
+                        <circle cx="130" cy="130" r="20" fill="white" stroke="#E7E5E4" stroke-width="1.5"/>
+                        <text x="130" y="135" text-anchor="middle" font-size="12" font-weight="600" fill="#8A5A6A">spin</text>
+                    </svg>
                 </div>
+                <br>
+                <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin the wheel</button>
             </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-                <button class="btn btn-secondary" onclick="showPage(2)" style="margin-left:0;">&larr; Practice</button>
-                <button class="btn" onclick="showPage(4)">Closing &rarr;</button>
+            <div class="wheel-result" id="wheelResult">
+                <div class="wr-label">For you</div>
+                <div class="wr-phrase" id="wrPhrase"></div>
+                <div class="wr-prompt" id="wrPrompt"></div>
             </div>
 
+            <div class="stage-done" id="done1">
+                <p><strong>Level 2 complete.</strong> You turned kindness toward yourself. That takes real courage.</p>
+                <button class="next-btn" onclick="unlockStage(2)">Continue to level 3 &rarr;</button>
+            </div>
         </div>
 
 
-        <!-- ======== PAGE 4: CLOSING ======== -->
-        <div class="page" id="page4">
+        <!-- STAGE 2: Build your own -->
+        <div class="quest-stage" id="stage2">
+            <h3>Build your own phrase</h3>
+            <p class="body-text">The classic phrases don't always land. Build one that your system can actually receive right now.</p>
 
-            <div class="card">
-                <h2>
-                    <div class="icon-circle icon-heart">&#x1F33F;</div>
-                    Closing
-                    <span class="timing-badge">5-7 min</span>
-                </h2>
-                <p style="color:var(--slate); margin-bottom:1.25rem; line-height:1.8;">
-                    One last round. Share your name and one of the following &mdash; or pass.
-                </p>
-
-                <div class="checkout-options">
-                    <div class="checkout-option" onclick="selectCheckout(this)">
-                        <span class="checkout-sym">&#x1F4AC;</span>
-                        <div class="checkout-label">One word</div>
-                        <div class="checkout-desc">How you're leaving today</div>
-                    </div>
-                    <div class="checkout-option" onclick="selectCheckout(this)">
-                        <span class="checkout-sym">&#x1F49B;</span>
-                        <div class="checkout-label">A kind phrase</div>
-                        <div class="checkout-desc">Something you're willing to say to yourself this week</div>
-                    </div>
-                    <div class="checkout-option" onclick="selectCheckout(this)">
-                        <span class="checkout-sym">&#x1F331;</span>
-                        <div class="checkout-label">One small thing</div>
-                        <div class="checkout-desc">A way you could be a little gentler with yourself</div>
-                    </div>
-                    <div class="checkout-option" onclick="selectCheckout(this)">
-                        <span class="checkout-sym">&#x1F90D;</span>
-                        <div class="checkout-label">Pass</div>
-                        <div class="checkout-desc">You're here, and that's enough</div>
-                    </div>
+            <div style="margin-top: 1.5rem;">
+                <div class="builder-label">Start with...</div>
+                <div class="builder-row" id="bRow0">
+                    <button class="builder-chip" onclick="pickChip(this,0)">May I</button>
+                    <button class="builder-chip" onclick="pickChip(this,0)">I deserve to</button>
+                    <button class="builder-chip" onclick="pickChip(this,0)">It's okay to</button>
+                    <button class="builder-chip" onclick="pickChip(this,0)">I'm allowed to</button>
                 </div>
 
-                <div class="facilitator-note">
-                    <div class="fn-label">Facilitator Note</div>
-                    <p>
-                        Compassion is not a personality trait. It is a skill. And like any skill, it gets stronger with practice, especially on the days it feels the most impossible. The fact that it's hard for them to be kind to themselves is exactly why we practice it here.
-                    </p>
+                <div class="builder-label">Then...</div>
+                <div class="builder-row" id="bRow1">
+                    <button class="builder-chip" onclick="pickChip(this,1)">be okay today</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">rest without earning it</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">take up space</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">not have it figured out</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">feel what I feel</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">be kind to myself</button>
                 </div>
+
+                <div class="builder-label">Add a closer (optional)...</div>
+                <div class="builder-row" id="bRow2">
+                    <button class="builder-chip" onclick="pickChip(this,2)">even when it's hard</button>
+                    <button class="builder-chip" onclick="pickChip(this,2)">without proving anything</button>
+                    <button class="builder-chip" onclick="pickChip(this,2)">right now</button>
+                    <button class="builder-chip" onclick="pickChip(this,2)">just as I am</button>
+                </div>
+
+                <div class="builder-preview" id="builderPreview">
+                    <div class="builder-preview-text placeholder" id="builderText">Your phrase will appear here...</div>
+                </div>
+
+                <button class="lock-btn" id="lockBtn" onclick="lockPhrase()">Lock it in</button>
             </div>
 
-            <div style="text-align:left;">
-                <button class="btn btn-secondary" onclick="showPage(3)" style="margin-left:0;">&larr; Discussion</button>
+            <div class="stage-done" id="done2">
+                <p><strong>Level 3 complete.</strong> You made it yours. That phrase belongs to you now.</p>
+                <button class="next-btn" onclick="unlockStage(3)">Continue to level 4 &rarr;</button>
             </div>
-
         </div>
 
 
-        <div class="crisis-footer">
-            <strong>Crisis resources:</strong> 988 Suicide &amp; Crisis Lifeline (call or text 988) &nbsp;&bull;&nbsp;
-            Crisis Text Line (text HOME to 741741) &nbsp;&bull;&nbsp; 911 for immediate danger
+        <!-- STAGE 3: The group -->
+        <div class="quest-stage" id="stage3">
+            <h3>Expand outward</h3>
+            <p class="body-text">Now send it to the people in this room. Everyone here is fighting their own battle. Tap each card.</p>
+
+            <div class="flip-grid" id="flipGrid3">
+                <div class="flip-cell" onclick="flipCell(this, 3)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Safety</div>
+                        <div class="fc-phrase-text">May we be safe.</div>
+                        <div class="fc-phrase-hint">All of us. In this room and beyond it.</div>
+                    </div>
+                </div>
+                <div class="flip-cell" onclick="flipCell(this, 3)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Joy</div>
+                        <div class="fc-phrase-text">May we be happy.</div>
+                        <div class="fc-phrase-hint">Not the performance. The real thing.</div>
+                    </div>
+                </div>
+                <div class="flip-cell" onclick="flipCell(this, 3)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Health</div>
+                        <div class="fc-phrase-text">May we be healthy.</div>
+                        <div class="fc-phrase-hint">Recovery is health. Showing up is health.</div>
+                    </div>
+                </div>
+                <div class="flip-cell" onclick="flipCell(this, 3)">
+                    <div class="fc-hidden">Tap to reveal</div>
+                    <div class="fc-phrase">
+                        <div class="fc-phrase-label">Ease</div>
+                        <div class="fc-phrase-text">May we live with ease.</div>
+                        <div class="fc-phrase-hint">No one in this room has to do this alone.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage-done" id="done3">
+                <p><strong>Quest complete.</strong> You went from someone easy, to yourself, to building your own phrase, to sending it outward. That's the whole practice.</p>
+            </div>
         </div>
 
-    </div><!-- /container -->
+        <div class="callout" style="margin-top: 2rem;">
+            <div class="callout-label">Facilitator note</div>
+            <p>
+                Some teens will resist directing kindness toward themselves. That resistance is information, not failure.
+                Name it gently: "If that was hard, you're not doing it wrong. That's actually the whole point of practicing."
+            </p>
+        </div>
 
-    <script>
-        // ---- Nav ----
-        function showPage(index, btn) {
-            document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === index));
-            if (btn) {
-                document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-                btn.classList.add('active');
-            } else {
-                document.querySelectorAll('.nav-pill').forEach((p, i) => p.classList.toggle('active', i === index));
+        <div class="page-nav">
+            <button onclick="showPage(1)">&larr; The Skills</button>
+            <button onclick="showPage(3)">Discussion &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== DISCUSSION ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Discussion</div>
+        <h2><span class="timing">15 to 20 min</span>Open it up</h2>
+        <p class="body-text">
+            Starting points, not a script. Let the conversation go where it goes. Pass is always fine.
+        </p>
+
+        <div class="questions">
+            <div class="question">
+                <div class="question-label">Opening</div>
+                <div class="question-text">What was it like to direct those phrases toward yourself? What came up?</div>
+                <div class="question-note">Normalize that it feels weird, awkward, or even painful. That's common.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Self-kindness</div>
+                <div class="question-text">If your best friend were going through exactly what you're going through right now, what would you say to them? Why is it so much harder to say that to yourself?</div>
+            </div>
+            <div class="question">
+                <div class="question-label">The critic</div>
+                <div class="question-text">What does your self-critical voice sound like? Does it sound like anyone? Where do you think it learned that tone?</div>
+                <div class="question-note">Some teens recognize a parent, coach, or social voice. Let them name it without pressure.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Common humanity</div>
+                <div class="question-text">What's something about your struggle that you assumed was just yours &mdash; until you realized other people go through it too?</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Recovery connection</div>
+                <div class="question-text">How does the way you talk to yourself affect your recovery? What happens on the days when you're hardest on yourself?</div>
+            </div>
+        </div>
+
+        <div class="callout">
+            <p>You can listen without sharing. You can share a little. You can pass with no explanation. Whatever keeps you in the room is the right choice.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(2)">&larr; Practice</button>
+            <button onclick="showPage(4)">Closing &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== CLOSING ======================== -->
+    <div class="page">
+
+        <div class="section-label">Closing</div>
+        <h2><span class="timing">5 to 7 min</span>One last round</h2>
+        <p class="body-text">Share your name and one of the following, or pass.</p>
+
+        <div class="options-grid">
+            <div class="option" onclick="select(this)">
+                <div class="option-label">One word</div>
+                <div class="option-desc">How you're leaving today</div>
+            </div>
+            <div class="option" onclick="select(this)">
+                <div class="option-label">A kind phrase</div>
+                <div class="option-desc">Something you're willing to say to yourself this week</div>
+            </div>
+            <div class="option" onclick="select(this)">
+                <div class="option-label">One small thing</div>
+                <div class="option-desc">A way you could be a little gentler with yourself</div>
+            </div>
+            <div class="option" onclick="select(this)">
+                <div class="option-label">Pass</div>
+                <div class="option-desc">You're here, and that's enough</div>
+            </div>
+        </div>
+
+        <div class="callout rose" style="margin-top: 2rem;">
+            <div class="callout-label">Facilitator note</div>
+            <p>
+                Compassion is not a personality trait. It is a skill. And like any skill, it gets stronger with practice, especially on the days it feels the most impossible. The fact that it's hard for them to be kind to themselves is exactly why we practice it here.
+            </p>
+        </div>
+
+        <div class="callout" style="margin-top: 1rem;">
+            <div class="callout-label">Weekly challenge</div>
+            <p>Pick one moment this week where you catch yourself being self-critical. Instead of following the criticism, try one phrase &mdash; yours or one from today. Notice what happens in your body when you do it. Bring the results next week if you want to share.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(3)">&larr; Discussion</button>
+            <button onclick="showPage(0)">Start over</button>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <strong>Crisis resources</strong><br>
+        988 Suicide & Crisis Lifeline: call or text 988<br>
+        Crisis Text Line: text HOME to 741741
+    </div>
+
+</div>
+
+<script>
+    // ---- Nav ----
+    function showPage(i, btn) {
+        document.querySelectorAll('.page').forEach((p, j) => p.classList.toggle('active', j === i));
+        document.querySelectorAll('.nav button').forEach((b, j) => b.classList.toggle('active', j === i));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleAcc(header) {
+        header.closest('.acc-item').classList.toggle('open');
+    }
+
+    function select(el) {
+        el.closest('.options-grid').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    // ===== COMPASSION QUEST =====
+    let currentStage = 0;
+    let completed = 0;
+    const flipCounts = { 0: 0, 3: 0 };
+
+    function updateProgress() {
+        document.querySelectorAll('.quest-pip').forEach((p, i) => {
+            p.classList.remove('active', 'done');
+            if (i < completed) p.classList.add('done');
+            else if (i === currentStage) p.classList.add('active');
+        });
+    }
+
+    function updateTabs() {
+        document.querySelectorAll('.level-tab').forEach((t, i) => {
+            t.classList.remove('active', 'done', 'locked');
+            if (i < completed) t.classList.add('done');
+            else if (i === currentStage) t.classList.add('active');
+            else t.classList.add('locked');
+        });
+    }
+
+    function goToStage(idx) {
+        if (idx > completed) return;
+        currentStage = idx;
+        document.querySelectorAll('.quest-stage').forEach((s, i) => s.classList.toggle('active', i === idx));
+        updateTabs();
+        updateProgress();
+    }
+
+    function unlockStage(idx) {
+        completed = idx;
+        currentStage = idx;
+        document.querySelectorAll('.quest-stage').forEach((s, i) => s.classList.toggle('active', i === idx));
+        updateTabs();
+        updateProgress();
+    }
+
+    function showDone(stageIdx) {
+        const el = document.getElementById('done' + stageIdx);
+        el.classList.add('show');
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // ---- Flip cells ----
+    function flipCell(el, stageIdx) {
+        if (el.classList.contains('revealed')) return;
+        el.classList.add('revealed');
+        flipCounts[stageIdx] = (flipCounts[stageIdx] || 0) + 1;
+        if (flipCounts[stageIdx] >= 4) {
+            setTimeout(() => showDone(stageIdx), 400);
+        }
+    }
+
+    // ===== WHEEL =====
+    const WHEEL_ITEMS = [
+        { phrase: 'May I be safe.', prompt: 'Say it once, silently. Notice where you feel it.' },
+        { phrase: 'May I be happy.', prompt: 'Not performing. Actually feeling. Even a sliver counts.' },
+        { phrase: 'May I be healthy.', prompt: 'Body, mind, and the way you treat yourself.' },
+        { phrase: 'May I live with ease.', prompt: 'Release one thing you\'re gripping right now.' },
+        { phrase: 'May I be okay today.', prompt: 'Just today. That\'s enough scope.' },
+        { phrase: 'May I be kinder to myself.', prompt: 'Not all the way. Just a little. That\'s the practice.' },
+        { phrase: 'May I forgive myself for being human.', prompt: 'Imperfection is the deal. Not a bug.' },
+        { phrase: 'May I have the courage to keep going.', prompt: 'You\'re here. That is evidence of courage.' }
+    ];
+
+    const W_COLORS = ['#F5EDF0','#F0EDF5','#FDFAF0','#EDF2F5','#F5F0ED','#EDF5F0','#F5EDEE','#EDEEF5'];
+    const W_BORDERS = ['#8A5A6A','#6A5A8A','#8A7A5A','#5A6A8A','#8A6A5A','#5A8A6A','#8A5A5A','#5A5A8A'];
+    let spinCount = 0;
+
+    function buildWheel() {
+        const g = document.getElementById('wheelGroup');
+        const n = WHEEL_ITEMS.length;
+        const slice = 360 / n;
+        let html = '';
+        for (let i = 0; i < n; i++) {
+            const startAngle = i * slice - 90;
+            const endAngle = startAngle + slice;
+            const r = 120;
+            const cx = 130, cy = 130;
+            const x1 = cx + r * Math.cos(startAngle * Math.PI / 180);
+            const y1 = cy + r * Math.sin(startAngle * Math.PI / 180);
+            const x2 = cx + r * Math.cos(endAngle * Math.PI / 180);
+            const y2 = cy + r * Math.sin(endAngle * Math.PI / 180);
+            const path = `M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z`;
+            html += `<path d="${path}" fill="${W_COLORS[i]}" stroke="${W_BORDERS[i]}" stroke-width="0.5"/>`;
+            const midAngle = (startAngle + slice / 2) * Math.PI / 180;
+            const tx = cx + (r * 0.6) * Math.cos(midAngle);
+            const ty = cy + (r * 0.6) * Math.sin(midAngle);
+            // Short label
+            const labels = ['safe','happy','healthy','ease','okay','kinder','forgive','courage'];
+            html += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="${W_BORDERS[i]}" font-family="Inter, sans-serif">${labels[i]}</text>`;
+        }
+        g.innerHTML = html;
+    }
+
+    function spinWheel() {
+        const btn = document.getElementById('spinBtn');
+        btn.disabled = true;
+        const n = WHEEL_ITEMS.length;
+        const slice = 360 / n;
+        const extra = 5 + Math.floor(Math.random() * 3);
+        const land = Math.floor(Math.random() * n);
+        const target = extra * 360 + (360 - land * slice - slice / 2);
+        document.getElementById('wheelGroup').style.transform = `rotate(${target}deg)`;
+
+        setTimeout(() => {
+            const item = WHEEL_ITEMS[land];
+            document.getElementById('wrPhrase').textContent = item.phrase;
+            document.getElementById('wrPrompt').textContent = item.prompt;
+            const result = document.getElementById('wheelResult');
+            result.classList.remove('show');
+            void result.offsetWidth;
+            result.classList.add('show');
+            result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            btn.disabled = false;
+            spinCount++;
+            if (spinCount >= 2) {
+                setTimeout(() => showDone(1), 600);
             }
-            document.querySelectorAll('.phase-dot').forEach((d, i) => {
-                d.classList.toggle('active', i === index);
-                d.classList.toggle('done', i < index);
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        }, 4200);
+    }
 
-        function togglePsych(header) {
-            const body = header.nextElementSibling;
-            const toggle = header.querySelector('.psych-toggle');
-            const isOpen = body.classList.contains('open');
-            body.classList.toggle('open', !isOpen);
-            toggle.classList.toggle('open', !isOpen);
-        }
+    // ===== PHRASE BUILDER =====
+    const picks = [null, null, null];
 
-        function selectCheckout(el) {
-            document.querySelectorAll('.checkout-option').forEach(o => o.classList.remove('selected'));
-            el.classList.add('selected');
-        }
+    function pickChip(el, row) {
+        document.querySelectorAll(`#bRow${row} .builder-chip`).forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        picks[row] = el.textContent;
+        renderPhrase();
+    }
 
-        function selectCheckin(el) {
-            document.querySelectorAll('.checkin-option').forEach(o => o.classList.remove('selected'));
-            el.classList.add('selected');
-        }
-
-        // ===== GAMIFIED PRACTICE ENGINE =====
-        let currentStage = 0;
-        let stagesCompleted = 0;
-        const flipCounts = { 0: 0, 3: 0 };
-        const FLIP_NEEDED = 4;
-
-        // -- XP Bar --
-        function updateXP() {
-            const pct = (stagesCompleted / 4) * 100;
-            document.getElementById('xpBar').style.width = pct + '%';
-            document.getElementById('xpLabel').textContent = stagesCompleted + ' / 4';
-        }
-
-        // -- Level badges --
-        function updateBadges() {
-            for (let i = 0; i < 4; i++) {
-                const badge = document.getElementById('lvl' + i);
-                badge.classList.remove('active', 'done', 'locked');
-                if (i < stagesCompleted) badge.classList.add('done');
-                else if (i === currentStage) badge.classList.add('active');
-                else badge.classList.add('locked');
-            }
-            for (let i = 0; i < 3; i++) {
-                const conn = document.getElementById('conn' + i);
-                conn.classList.toggle('done', i < stagesCompleted);
-            }
-        }
-
-        // -- Stage navigation --
-        function goToStage(idx) {
-            if (idx > stagesCompleted) return;
-            currentStage = idx;
-            document.querySelectorAll('.quest-stage').forEach((s, i) => s.classList.toggle('active', i === idx));
-            updateBadges();
-        }
-
-        function unlockStage(idx) {
-            stagesCompleted = idx;
-            currentStage = idx;
-            updateXP();
-            document.querySelectorAll('.quest-stage').forEach((s, i) => s.classList.toggle('active', i === idx));
-            updateBadges();
-        }
-
-        function showStageComplete(stageIdx) {
-            const el = document.getElementById('complete' + stageIdx);
-            el.style.display = 'block';
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // -- Flip Cards --
-        function flipCard(el, stageIdx) {
-            if (el.classList.contains('flipped')) return;
-            el.classList.add('flipped');
-            flipCounts[stageIdx] = (flipCounts[stageIdx] || 0) + 1;
-            if (flipCounts[stageIdx] >= FLIP_NEEDED) {
-                setTimeout(() => showStageComplete(stageIdx), 600);
+    function renderPhrase() {
+        const parts = picks.filter(Boolean);
+        const textEl = document.getElementById('builderText');
+        const preview = document.getElementById('builderPreview');
+        const btn = document.getElementById('lockBtn');
+        if (parts.length === 0) {
+            textEl.textContent = 'Your phrase will appear here...';
+            textEl.classList.add('placeholder');
+            preview.classList.remove('has-content');
+            btn.classList.remove('ready');
+        } else {
+            let phrase = parts.join(' ');
+            if (!phrase.endsWith('.')) phrase += '.';
+            phrase = phrase.charAt(0).toUpperCase() + phrase.slice(1);
+            textEl.textContent = '\u201C' + phrase + '\u201D';
+            textEl.classList.remove('placeholder');
+            preview.classList.add('has-content');
+            if (picks[0] && picks[1]) {
+                btn.classList.add('ready');
             }
         }
+    }
 
-        // ===== SPINNER WHEEL =====
-        const WHEEL_ITEMS = [
-            { emoji: '\u{1F9E1}', who: 'For You', phrase: 'May I be safe.', prompt: 'Say it once, silently. Notice where you feel it.' },
-            { emoji: '\u{2728}', who: 'For You', phrase: 'May I be happy.', prompt: 'Not performing. Actually feeling. Even a sliver counts.' },
-            { emoji: '\u{1F33F}', who: 'For You', phrase: 'May I be healthy.', prompt: 'Body, mind, and the way you treat yourself.' },
-            { emoji: '\u{1F54A}', who: 'For You', phrase: 'May I live with ease.', prompt: 'Release one thing you\'re gripping right now.' },
-            { emoji: '\u{1F49B}', who: 'For You', phrase: 'May I be okay today.', prompt: 'Just today. That\'s enough scope.' },
-            { emoji: '\u{1F331}', who: 'For You', phrase: 'May I be a little kinder to myself.', prompt: 'Not all the way. Just a little. That\'s the practice.' },
-            { emoji: '\u{1F30A}', who: 'For You', phrase: 'May I forgive myself for being human.', prompt: 'Imperfection is the deal. Not a bug.' },
-            { emoji: '\u{1F525}', who: 'For You', phrase: 'May I have the courage to keep going.', prompt: 'You\'re here. That is evidence of courage.' }
-        ];
+    function lockPhrase() {
+        if (!picks[0] || !picks[1]) return;
+        document.getElementById('lockBtn').style.display = 'none';
+        showDone(2);
+    }
 
-        const COLORS = ['#FDA4AF','#C4B5FD','#FDDCB5','#93C5FD','#FBC2C8','#87A878','#FCD34D','#E8D5F5'];
-        let wheelAngle = 0;
-        let spinCount = 0;
-
-        function buildWheel() {
-            const g = document.getElementById('wheelGroup');
-            const n = WHEEL_ITEMS.length;
-            const slice = 360 / n;
-            let html = '';
-            for (let i = 0; i < n; i++) {
-                const startAngle = i * slice - 90;
-                const endAngle = startAngle + slice;
-                const r = 130;
-                const cx = 140, cy = 140;
-                const x1 = cx + r * Math.cos(startAngle * Math.PI / 180);
-                const y1 = cy + r * Math.sin(startAngle * Math.PI / 180);
-                const x2 = cx + r * Math.cos(endAngle * Math.PI / 180);
-                const y2 = cy + r * Math.sin(endAngle * Math.PI / 180);
-                const largeArc = slice > 180 ? 1 : 0;
-                const path = `M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`;
-                html += `<path d="${path}" fill="${COLORS[i]}" stroke="white" stroke-width="2"/>`;
-                const midAngle = (startAngle + slice / 2) * Math.PI / 180;
-                const tx = cx + (r * 0.65) * Math.cos(midAngle);
-                const ty = cy + (r * 0.65) * Math.sin(midAngle);
-                html += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="central" font-size="20">${WHEEL_ITEMS[i].emoji}</text>`;
-            }
-            g.innerHTML = html;
-        }
-
-        function spinWheel() {
-            const btn = document.getElementById('spinBtn');
-            btn.disabled = true;
-            const n = WHEEL_ITEMS.length;
-            const slice = 360 / n;
-            const extraSpins = 5 + Math.floor(Math.random() * 3);
-            const landIndex = Math.floor(Math.random() * n);
-            const targetAngle = extraSpins * 360 + (360 - landIndex * slice - slice / 2);
-            wheelAngle = targetAngle;
-            const g = document.getElementById('wheelGroup');
-            g.style.transform = `rotate(${targetAngle}deg)`;
-
-            setTimeout(() => {
-                const item = WHEEL_ITEMS[landIndex];
-                document.getElementById('wrEmoji').textContent = item.emoji;
-                document.getElementById('wrPhrase').textContent = item.phrase;
-                document.getElementById('wrPrompt').textContent = item.prompt;
-                const result = document.getElementById('wheelResult');
-                result.classList.remove('show');
-                void result.offsetWidth;
-                result.classList.add('show');
-                result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                btn.disabled = false;
-                spinCount++;
-                if (spinCount >= 2) {
-                    setTimeout(() => showStageComplete(1), 800);
-                }
-            }, 4200);
-        }
-
-        // ===== PHRASE BUILDER =====
-        const builderSelections = [null, null, null];
-
-        function selectChip(el, rowIdx) {
-            document.querySelectorAll(`#builderRow${rowIdx} .builder-chip`).forEach(c => c.classList.remove('selected'));
-            el.classList.add('selected');
-            builderSelections[rowIdx] = el.textContent;
-            updateBuilderPreview();
-        }
-
-        function updateBuilderPreview() {
-            const parts = builderSelections.filter(Boolean);
-            const textEl = document.getElementById('builderText');
-            const doneBtn = document.getElementById('builderDone');
-            if (parts.length === 0) {
-                textEl.textContent = 'Your phrase will appear here...';
-                textEl.classList.add('placeholder');
-                doneBtn.style.opacity = '0.4';
-                doneBtn.style.pointerEvents = 'none';
-            } else {
-                let phrase = parts.join(' ');
-                if (!phrase.endsWith('.')) phrase += '.';
-                // Capitalize first letter
-                phrase = phrase.charAt(0).toUpperCase() + phrase.slice(1);
-                textEl.textContent = '"' + phrase + '"';
-                textEl.classList.remove('placeholder');
-                if (builderSelections[0] && builderSelections[1]) {
-                    doneBtn.style.opacity = '1';
-                    doneBtn.style.pointerEvents = 'auto';
-                }
-            }
-        }
-
-        function completeBuilder() {
-            document.getElementById('builderDone').style.display = 'none';
-            showStageComplete(2);
-        }
-
-        // Init wheel on load
-        buildWheel();
-        updateXP();
-    </script>
+    buildWheel();
+</script>
 </body>
 </html>

@@ -184,9 +184,9 @@
             border-radius: 8px; overflow: hidden; margin: 1rem 0 1.5rem;
         }
         .level-tab {
-            flex: 1; padding: 0.75rem 0.5rem; background: var(--surface);
-            border: none; font-family: inherit; font-size: 0.72rem; font-weight: 600;
-            letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+            flex: 1; padding: 0.7rem 0.25rem; background: var(--surface);
+            border: none; font-family: inherit; font-size: 0.62rem; font-weight: 600;
+            letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-3);
             cursor: pointer; transition: background 0.15s, color 0.15s; text-align: center;
         }
         .level-tab:hover { background: var(--bg); }
@@ -197,36 +197,144 @@
         .quest-stage { display: none; }
         .quest-stage.active { display: block; animation: appear 0.25s ease; }
 
-        /* Flip cards */
-        .flip-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+        /* ---- Tarot deck system ---- */
+        .deck-area {
+            background: #1E1E1E;
+            margin: 1.5rem -1.5rem; padding: 2rem 1.5rem 1.5rem;
+            border-radius: 12px;
+        }
+        .deck-instruction {
+            text-align: center; font-size: 0.75rem; color: #666;
+            margin-bottom: 1rem; letter-spacing: 0.03em;
+        }
+        .card-spread {
+            display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+        }
+        .tarot-card {
+            width: 108px; height: 185px; perspective: 800px;
+            cursor: pointer; flex-shrink: 0;
+        }
+        .tarot-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .tarot-card.flipped .tarot-inner { transform: rotateY(180deg); }
+        .tarot-card.active .tarot-inner {
+            filter: drop-shadow(0 0 12px rgba(138, 90, 106, 0.4));
+        }
+        .tarot-back, .tarot-front {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            border-radius: 10px; display: flex; align-items: center;
+            justify-content: center; text-align: center; flex-direction: column;
+        }
+        .tarot-back {
+            background: #2A2A2A; border: 2px solid #4A4A4A;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3),
+                        inset 0 0 0 6px #2A2A2A, inset 0 0 0 7px #4A4A4A;
+            gap: 0.5rem;
+        }
+        .tarot-back .back-glyph {
+            font-size: 1.8rem; color: #B8A88A; opacity: 0.35; line-height: 1;
+        }
+        .tarot-back .back-label {
+            font-size: 0.42rem; font-weight: 600; letter-spacing: 0.2em;
+            text-transform: uppercase; color: #B8A88A; opacity: 0.3;
+        }
+        .tarot-back .back-line-t,
+        .tarot-back .back-line-b {
+            position: absolute; left: 14px; right: 14px; height: 1px;
+            background: #4A4A4A; opacity: 0.6;
+        }
+        .tarot-back .back-line-t { top: 16px; }
+        .tarot-back .back-line-b { bottom: 16px; }
+        .tarot-back .back-corner {
+            position: absolute; width: 6px; height: 6px;
+            border: 1px solid #4A4A4A; opacity: 0.4;
+        }
+        .tarot-back .bc-tl { top: 12px; left: 10px; border-right: none; border-bottom: none; }
+        .tarot-back .bc-tr { top: 12px; right: 10px; border-left: none; border-bottom: none; }
+        .tarot-back .bc-bl { bottom: 12px; left: 10px; border-right: none; border-top: none; }
+        .tarot-back .bc-br { bottom: 12px; right: 10px; border-left: none; border-top: none; }
+        .tarot-front {
+            transform: rotateY(180deg); background: var(--surface);
+            border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            padding: 0.6rem; justify-content: flex-start;
+        }
+        .tarot-front .front-bar {
+            width: 100%; height: 3px; position: absolute; top: 0; left: 0;
+            border-radius: 10px 10px 0 0;
+        }
+        .tarot-front .front-suit {
+            font-size: 0.42rem; font-weight: 600; letter-spacing: 0.16em;
+            text-transform: uppercase; margin-top: 0.5rem;
+        }
+        .tarot-front .front-glyph { font-size: 0.9rem; line-height: 1; margin: 0.25rem 0; }
+        .tarot-front .front-name {
+            font-size: 0.78rem; font-weight: 700; color: var(--text); line-height: 1.15;
+        }
+        .tarot-front .front-hint {
+            font-size: 0.45rem; color: var(--text-3); font-style: italic; line-height: 1.4; margin-top: 0.15rem;
+        }
+        .deck-controls { text-align: center; margin-top: 1.25rem; }
+        .reshuffle-btn {
+            background: #2A2A2A; border: 1px solid #4A4A4A; border-radius: 6px;
+            font-family: inherit; font-size: 0.7rem; font-weight: 500;
+            color: #B8A88A; padding: 0.5rem 1.5rem; cursor: pointer;
+            transition: background 0.15s, border-color 0.15s; letter-spacing: 0.06em;
+        }
+        .reshuffle-btn:hover { background: #3A3A3A; border-color: #666; }
+
+        /* Reading panel */
+        .reading-panel { display: none; margin-top: 1.5rem; animation: appear 0.35s ease; }
+        .reading-panel.active { display: block; }
+        .reading-name {
+            font-size: 1.2rem; font-weight: 700; color: var(--text);
+            letter-spacing: -0.02em; margin-bottom: 0.5rem;
+        }
+        .reading-interp {
+            font-size: 0.9rem; color: var(--text-2); line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+        .reading-prompt-label {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--text-3); margin-bottom: 0.4rem;
+        }
+        .reading-prompt {
+            font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.7;
+            padding: 1.1rem 1.25rem; border-left: 3px solid var(--border); background: var(--bg);
+        }
+        .reading-footer {
+            margin-top: 1rem; font-size: 0.72rem; color: var(--text-3);
+            font-style: italic; line-height: 1.6;
+        }
+
+        /* Challenge grid (rewrite the critic) */
+        .challenge-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
             background: var(--border); border: 1px solid var(--border);
             border-radius: 8px; overflow: hidden; margin: 1.5rem 0;
         }
-        .flip-cell {
-            background: var(--surface); padding: 1.5rem 1rem; text-align: center;
-            cursor: pointer; transition: background 0.15s; min-height: 140px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        .challenge {
+            background: var(--surface); padding: 1.25rem;
+            cursor: pointer; transition: background 0.15s;
         }
-        .flip-cell:hover { background: var(--bg); }
-        .flip-cell.revealed { background: var(--accent-bg); cursor: default; }
-        .flip-cell .fc-hidden {
-            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--text-3);
+        .challenge:hover { background: var(--bg); }
+        .challenge.revealed { background: var(--accent-bg); }
+        .challenge-domain {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-3); margin-bottom: 0.3rem;
         }
-        .flip-cell .fc-phrase { display: none; }
-        .flip-cell.revealed .fc-hidden { display: none; }
-        .flip-cell.revealed .fc-phrase { display: block; }
-        .fc-phrase-label {
-            font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+        .challenge-harsh {
+            font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem;
         }
-        .fc-phrase-text {
-            font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 0.35rem;
+        .challenge-kind {
+            font-size: 0.82rem; color: var(--accent); line-height: 1.6;
+            display: none; font-weight: 500;
         }
-        .fc-phrase-hint {
-            font-size: 0.78rem; color: var(--text-3); font-style: italic; line-height: 1.5;
-        }
+        .challenge.revealed .challenge-kind { display: block; }
+        .challenge.revealed .challenge-harsh { color: var(--text-3); text-decoration: line-through; font-weight: 400; }
 
         /* Spinner wheel */
         .wheel-area { text-align: center; margin: 1.5rem 0; }
@@ -513,9 +621,9 @@
     <div class="page">
 
         <div class="section-label warm">Practice</div>
-        <h2><span class="timing">15 to 20 min</span>The compassion quest</h2>
+        <h2><span class="timing">20 to 25 min</span>The compassion quest</h2>
         <p class="body-text">
-            Four levels. Each one stretches your compassion a little further. Start easy, build from there.
+            Six levels. Each one stretches your compassion a little further. You can't skip ahead. Start easy, build from there.
         </p>
 
         <div class="quest-progress" id="questProgress">
@@ -523,67 +631,101 @@
             <div class="quest-pip"></div>
             <div class="quest-pip"></div>
             <div class="quest-pip"></div>
+            <div class="quest-pip"></div>
+            <div class="quest-pip"></div>
         </div>
 
         <div class="level-tabs" id="levelTabs">
-            <button class="level-tab active" onclick="goToStage(0)">1 &middot; Someone easy</button>
-            <button class="level-tab locked" onclick="goToStage(1)">2 &middot; Yourself</button>
-            <button class="level-tab locked" onclick="goToStage(2)">3 &middot; Build your own</button>
-            <button class="level-tab locked" onclick="goToStage(3)">4 &middot; The group</button>
+            <button class="level-tab active" onclick="goToStage(0)">1 &middot; Draw</button>
+            <button class="level-tab locked" onclick="goToStage(1)">2 &middot; Rewrite</button>
+            <button class="level-tab locked" onclick="goToStage(2)">3 &middot; Spin</button>
+            <button class="level-tab locked" onclick="goToStage(3)">4 &middot; Build</button>
+            <button class="level-tab locked" onclick="goToStage(4)">5 &middot; Hard one</button>
+            <button class="level-tab locked" onclick="goToStage(5)">6 &middot; Together</button>
         </div>
 
 
-        <!-- STAGE 0: Someone easy -->
+        <!-- STAGE 0: Card draw — someone easy -->
         <div class="quest-stage active" id="stage0">
-            <h3>Send it to someone easy</h3>
-            <p class="body-text">Think of someone whose warmth you can feel. A person, a pet, anyone. Tap each card to reveal a phrase. Direct it toward them.</p>
+            <h3>Draw a card for someone you care about</h3>
+            <p class="body-text">Think of someone whose warmth you can feel. A person, a pet, anyone. Draw a card. Direct whatever it says toward them.</p>
 
-            <div class="flip-grid" id="flipGrid0">
-                <div class="flip-cell" onclick="flipCell(this, 0)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Safe</div>
-                        <div class="fc-phrase-text">May you be safe.</div>
-                        <div class="fc-phrase-hint">Protected. Held. Out of harm's way.</div>
-                    </div>
-                </div>
-                <div class="flip-cell" onclick="flipCell(this, 0)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Happy</div>
-                        <div class="fc-phrase-text">May you be happy.</div>
-                        <div class="fc-phrase-hint">Not performing it. Actually feeling it.</div>
-                    </div>
-                </div>
-                <div class="flip-cell" onclick="flipCell(this, 0)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Healthy</div>
-                        <div class="fc-phrase-text">May you be healthy.</div>
-                        <div class="fc-phrase-hint">In body, in mind, in how you treat yourself.</div>
-                    </div>
-                </div>
-                <div class="flip-cell" onclick="flipCell(this, 0)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">At ease</div>
-                        <div class="fc-phrase-text">May you live with ease.</div>
-                        <div class="fc-phrase-hint">Not striving. Not bracing. Just being.</div>
-                    </div>
+            <div class="deck-area">
+                <div class="deck-instruction">Tap a card to draw it. The reading appears below.</div>
+                <div class="card-spread" id="spread0"></div>
+                <div class="deck-controls">
+                    <button class="reshuffle-btn" onclick="dealDeck(0)">Deal again</button>
                 </div>
             </div>
 
+            <div class="reading-panel" id="reading0">
+                <div class="reading-name" id="r0-name"></div>
+                <div class="reading-interp" id="r0-interp"></div>
+                <div class="reading-prompt-label">Silently offer</div>
+                <div class="reading-prompt" id="r0-prompt"></div>
+                <div class="reading-footer">You don't have to share who you're thinking of. Just hold them in your mind.</div>
+            </div>
+
             <div class="stage-done" id="done0">
-                <p><strong>Level 1 complete.</strong> You offered kindness to someone you care about. That's where it starts.</p>
+                <p><strong>Level 1 complete.</strong> You sent kindness toward someone you care about. That's where it starts.</p>
                 <button class="next-btn" onclick="unlockStage(1)">Continue to level 2 &rarr;</button>
             </div>
         </div>
 
 
-        <!-- STAGE 1: Yourself (wheel) -->
+        <!-- STAGE 1: Rewrite the critic -->
         <div class="quest-stage" id="stage1">
+            <h3>Rewrite the critic</h3>
+            <p class="body-text">Six things the self-critical voice says. Tap each one to see what compassion sounds like instead. Be honest about which ones you recognize.</p>
+
+            <div class="challenge-grid" id="criticGrid">
+                <div class="challenge" onclick="revealCritic(this)">
+                    <div class="challenge-domain">After a slip</div>
+                    <div class="challenge-harsh">"I'm so weak. I can't even do this one thing."</div>
+                    <div class="challenge-kind">A slip is a data point, not a verdict. You came back. That's the skill.</div>
+                </div>
+                <div class="challenge" onclick="revealCritic(this)">
+                    <div class="challenge-domain">Comparing</div>
+                    <div class="challenge-harsh">"Everyone else is handling this better than me."</div>
+                    <div class="challenge-kind">You're comparing your inside to their outside. Everyone in this room is fighting something you can't see.</div>
+                </div>
+                <div class="challenge" onclick="revealCritic(this)">
+                    <div class="challenge-domain">Progress</div>
+                    <div class="challenge-harsh">"I should be further along by now."</div>
+                    <div class="challenge-kind">Recovery is not a race with a timeline. You are exactly where your pace has taken you. That's not behind.</div>
+                </div>
+                <div class="challenge" onclick="revealCritic(this)">
+                    <div class="challenge-domain">Asking for help</div>
+                    <div class="challenge-harsh">"I'm being a burden. I should handle this myself."</div>
+                    <div class="challenge-kind">Needing support is not a flaw in you. It's a feature of being human. You'd never call a friend a burden for the same thing.</div>
+                </div>
+                <div class="challenge" onclick="revealCritic(this)">
+                    <div class="challenge-domain">Bad days</div>
+                    <div class="challenge-harsh">"I ruined everything. Today was a total waste."</div>
+                    <div class="challenge-kind">One hard moment does not erase the rest. A bad hour is not a bad day. A bad day is not a bad life.</div>
+                </div>
+                <div class="challenge" onclick="revealCritic(this)">
+                    <div class="challenge-domain">Identity</div>
+                    <div class="challenge-harsh">"I'm just broken. This is who I am."</div>
+                    <div class="challenge-kind">You are not your worst moment or your hardest pattern. You are the person who keeps showing up in rooms like this one.</div>
+                </div>
+            </div>
+
+            <div class="callout" style="margin-top: 1rem;">
+                <p>You don't have to share which ones hit. Just notice. If something lands, sit with it.</p>
+            </div>
+
+            <div class="stage-done" id="done1">
+                <p><strong>Level 2 complete.</strong> You looked at the critic's script and found a different version. That's not easy.</p>
+                <button class="next-btn" onclick="unlockStage(2)">Continue to level 3 &rarr;</button>
+            </div>
+        </div>
+
+
+        <!-- STAGE 2: Spin the wheel — yourself -->
+        <div class="quest-stage" id="stage2">
             <h3>Turn it toward yourself</h3>
-            <p class="body-text">This is the hard part. Spin the wheel. Whatever it lands on, try saying it to yourself &mdash; silently or out loud.</p>
+            <p class="body-text">This is the hard part. Spin the wheel. Whatever it lands on, try saying it to yourself &mdash; silently or out loud. Spin at least twice.</p>
 
             <div class="wheel-area">
                 <div class="wheel-box">
@@ -604,15 +746,15 @@
                 <div class="wr-prompt" id="wrPrompt"></div>
             </div>
 
-            <div class="stage-done" id="done1">
-                <p><strong>Level 2 complete.</strong> You turned kindness toward yourself. That takes real courage.</p>
-                <button class="next-btn" onclick="unlockStage(2)">Continue to level 3 &rarr;</button>
+            <div class="stage-done" id="done2">
+                <p><strong>Level 3 complete.</strong> You turned kindness toward yourself. That takes real courage.</p>
+                <button class="next-btn" onclick="unlockStage(3)">Continue to level 4 &rarr;</button>
             </div>
         </div>
 
 
-        <!-- STAGE 2: Build your own -->
-        <div class="quest-stage" id="stage2">
+        <!-- STAGE 3: Build your own phrase -->
+        <div class="quest-stage" id="stage3">
             <h3>Build your own phrase</h3>
             <p class="body-text">The classic phrases don't always land. Build one that your system can actually receive right now.</p>
 
@@ -623,6 +765,7 @@
                     <button class="builder-chip" onclick="pickChip(this,0)">I deserve to</button>
                     <button class="builder-chip" onclick="pickChip(this,0)">It's okay to</button>
                     <button class="builder-chip" onclick="pickChip(this,0)">I'm allowed to</button>
+                    <button class="builder-chip" onclick="pickChip(this,0)">I can</button>
                 </div>
 
                 <div class="builder-label">Then...</div>
@@ -633,6 +776,8 @@
                     <button class="builder-chip" onclick="pickChip(this,1)">not have it figured out</button>
                     <button class="builder-chip" onclick="pickChip(this,1)">feel what I feel</button>
                     <button class="builder-chip" onclick="pickChip(this,1)">be kind to myself</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">ask for help</button>
+                    <button class="builder-chip" onclick="pickChip(this,1)">start over tomorrow</button>
                 </div>
 
                 <div class="builder-label">Add a closer (optional)...</div>
@@ -641,6 +786,8 @@
                     <button class="builder-chip" onclick="pickChip(this,2)">without proving anything</button>
                     <button class="builder-chip" onclick="pickChip(this,2)">right now</button>
                     <button class="builder-chip" onclick="pickChip(this,2)">just as I am</button>
+                    <button class="builder-chip" onclick="pickChip(this,2)">and that's enough</button>
+                    <button class="builder-chip" onclick="pickChip(this,2)">even if no one sees it</button>
                 </div>
 
                 <div class="builder-preview" id="builderPreview">
@@ -650,55 +797,72 @@
                 <button class="lock-btn" id="lockBtn" onclick="lockPhrase()">Lock it in</button>
             </div>
 
-            <div class="stage-done" id="done2">
-                <p><strong>Level 3 complete.</strong> You made it yours. That phrase belongs to you now.</p>
-                <button class="next-btn" onclick="unlockStage(3)">Continue to level 4 &rarr;</button>
+            <div class="stage-done" id="done3">
+                <p><strong>Level 4 complete.</strong> You made it yours. That phrase belongs to you now.</p>
+                <button class="next-btn" onclick="unlockStage(4)">Continue to level 5 &rarr;</button>
             </div>
         </div>
 
 
-        <!-- STAGE 3: The group -->
-        <div class="quest-stage" id="stage3">
-            <h3>Expand outward</h3>
-            <p class="body-text">Now send it to the people in this room. Everyone here is fighting their own battle. Tap each card.</p>
+        <!-- STAGE 4: Someone difficult -->
+        <div class="quest-stage" id="stage4">
+            <h3>The hard one</h3>
+            <p class="body-text">
+                This is the level most people skip. In the traditional practice, you eventually direct loving-kindness toward someone difficult. Not someone who hurt you deeply. Just someone you're frustrated with, annoyed by, or in conflict with right now. Draw a card.
+            </p>
 
-            <div class="flip-grid" id="flipGrid3">
-                <div class="flip-cell" onclick="flipCell(this, 3)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Safety</div>
-                        <div class="fc-phrase-text">May we be safe.</div>
-                        <div class="fc-phrase-hint">All of us. In this room and beyond it.</div>
-                    </div>
-                </div>
-                <div class="flip-cell" onclick="flipCell(this, 3)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Joy</div>
-                        <div class="fc-phrase-text">May we be happy.</div>
-                        <div class="fc-phrase-hint">Not the performance. The real thing.</div>
-                    </div>
-                </div>
-                <div class="flip-cell" onclick="flipCell(this, 3)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Health</div>
-                        <div class="fc-phrase-text">May we be healthy.</div>
-                        <div class="fc-phrase-hint">Recovery is health. Showing up is health.</div>
-                    </div>
-                </div>
-                <div class="flip-cell" onclick="flipCell(this, 3)">
-                    <div class="fc-hidden">Tap to reveal</div>
-                    <div class="fc-phrase">
-                        <div class="fc-phrase-label">Ease</div>
-                        <div class="fc-phrase-text">May we live with ease.</div>
-                        <div class="fc-phrase-hint">No one in this room has to do this alone.</div>
-                    </div>
+            <div class="callout" style="margin-top: 0.75rem; margin-bottom: 0;">
+                <p>This is not about forgiving. It's not about condoning. It's about loosening the grip that resentment has on <strong>you</strong>. You're not doing this for them.</p>
+            </div>
+
+            <div class="deck-area">
+                <div class="deck-instruction">Tap a card. Hold the difficult person in your mind. Try the phrase.</div>
+                <div class="card-spread" id="spread4"></div>
+                <div class="deck-controls">
+                    <button class="reshuffle-btn" onclick="dealDeck(4)">Deal again</button>
                 </div>
             </div>
 
-            <div class="stage-done" id="done3">
-                <p><strong>Quest complete.</strong> You went from someone easy, to yourself, to building your own phrase, to sending it outward. That's the whole practice.</p>
+            <div class="reading-panel" id="reading4">
+                <div class="reading-name" id="r4-name"></div>
+                <div class="reading-interp" id="r4-interp"></div>
+                <div class="reading-prompt-label">Try offering</div>
+                <div class="reading-prompt" id="r4-prompt"></div>
+                <div class="reading-footer">If you can't say it yet, just notice the resistance. That's data too. Pass is always fine.</div>
+            </div>
+
+            <div class="stage-done" id="done4">
+                <p><strong>Level 5 complete.</strong> That's the hardest one. Whether you could say it or not, you tried. That matters.</p>
+                <button class="next-btn" onclick="unlockStage(5)">Continue to level 6 &rarr;</button>
+            </div>
+        </div>
+
+
+        <!-- STAGE 5: The group — compassion deck draw -->
+        <div class="quest-stage" id="stage5">
+            <h3>Together</h3>
+            <p class="body-text">
+                Final level. Everyone draws a card from the compassion deck. Each card has a reflection and a prompt you can share with the group. Or just keep it.
+            </p>
+
+            <div class="deck-area">
+                <div class="deck-instruction">Each person draws one card. Share the prompt if you want to. Pass is always available.</div>
+                <div class="card-spread" id="spread5"></div>
+                <div class="deck-controls">
+                    <button class="reshuffle-btn" onclick="dealDeck(5)">Deal again</button>
+                </div>
+            </div>
+
+            <div class="reading-panel" id="reading5">
+                <div class="reading-name" id="r5-name"></div>
+                <div class="reading-interp" id="r5-interp"></div>
+                <div class="reading-prompt-label">For the group</div>
+                <div class="reading-prompt" id="r5-prompt"></div>
+                <div class="reading-footer">Share as much or as little as you want. Listening counts. Pass is always available.</div>
+            </div>
+
+            <div class="stage-done" id="done5">
+                <p><strong>Quest complete.</strong> You went from someone easy, through the critic, toward yourself, built your own phrase, tried the hard one, and came back to the group. That's the whole arc of compassion.</p>
             </div>
         </div>
 
@@ -707,6 +871,7 @@
             <p>
                 Some teens will resist directing kindness toward themselves. That resistance is information, not failure.
                 Name it gently: "If that was hard, you're not doing it wrong. That's actually the whole point of practicing."
+                Level 5 (the difficult person) is optional. Read the room. If the group isn't ready, skip to 6.
             </p>
         </div>
 
@@ -832,10 +997,10 @@
         el.classList.add('selected');
     }
 
-    // ===== COMPASSION QUEST =====
+    // ===== COMPASSION QUEST ENGINE =====
+    const TOTAL_STAGES = 6;
     let currentStage = 0;
     let completed = 0;
-    const flipCounts = { 0: 0, 3: 0 };
 
     function updateProgress() {
         document.querySelectorAll('.quest-pip').forEach((p, i) => {
@@ -872,19 +1037,140 @@
 
     function showDone(stageIdx) {
         const el = document.getElementById('done' + stageIdx);
+        if (!el || el.classList.contains('show')) return;
         el.classList.add('show');
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // ---- Flip cells ----
-    function flipCell(el, stageIdx) {
-        if (el.classList.contains('revealed')) return;
-        el.classList.add('revealed');
-        flipCounts[stageIdx] = (flipCounts[stageIdx] || 0) + 1;
-        if (flipCounts[stageIdx] >= 4) {
-            setTimeout(() => showDone(stageIdx), 400);
+
+    // ===== TAROT CARD DECKS =====
+    function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    // Deck 0: someone you care about
+    const DECK_EASY = [
+        { name: 'Safety', glyph: '\u25C8', interp: 'You are wishing them protection. Not from all difficulty, but from the kind that breaks without teaching. Safety is the ground compassion stands on.', prompt: '"May you be safe." Say it once. Notice what it feels like to want that for someone.' },
+        { name: 'Happiness', glyph: '\u25CE', interp: 'You are wishing them real happiness. Not the performance. Not the curated version. The kind that shows up when no one is watching.', prompt: '"May you be happy." Not the Instagram kind. The quiet kind. The kind that doesn\'t need an audience.' },
+        { name: 'Health', glyph: '\u25C7', interp: 'You are wishing them wholeness. In body, in mind, in the way they treat themselves. Health is not the absence of struggle. It\'s the capacity to hold it.', prompt: '"May you be healthy." In all the ways that word can mean something.' },
+        { name: 'Ease', glyph: '\u25C6', interp: 'You are wishing them a moment without striving. Not forever. Just a breath where they don\'t have to earn their right to exist.', prompt: '"May you live with ease." Even for a moment. Even just today.' },
+        { name: 'Belonging', glyph: '\u2726', interp: 'You are wishing them the feeling of not having to perform to be included. Belonging is not about being liked. It\'s about being seen.', prompt: '"May you know you belong." Not because you earned it. Because you do.' },
+        { name: 'Peace', glyph: '\u25C8', interp: 'You are wishing them stillness that isn\'t numbness. The kind of quiet that comes after you stop running from something.', prompt: '"May you be at peace." Not the absence of conflict. The ability to hold it without breaking.' },
+        { name: 'Courage', glyph: '\u25CE', interp: 'You are wishing them the strength to keep going. Not the loud kind. The kind that shows up when you open your eyes in the morning and decide to try again.', prompt: '"May you have the courage to keep going." Even when it doesn\'t feel brave.' },
+    ];
+
+    // Deck 4: someone difficult
+    const DECK_HARD = [
+        { name: 'The Loosening', glyph: '\u25C7', interp: 'Resentment is a fist you\'re making with your whole body. This is not about unclenching for their sake. It\'s about what the grip is costing you.', prompt: '"May you find what you\'re looking for." You don\'t have to mean it fully. Just be willing to say it.' },
+        { name: 'The Mirror', glyph: '\u25C6', interp: 'The thing that bothers you most about them might be something you\'re afraid of in yourself. That\'s not a judgment. It\'s an invitation to look.', prompt: '"May you be free from the suffering that makes you act the way you do."' },
+        { name: 'The Human', glyph: '\u2726', interp: 'They are a person with a history you don\'t fully know. That doesn\'t excuse anything. It just means the story is bigger than the part you can see.', prompt: '"May you be happy." Notice what comes up when you say that. The resistance is the practice.' },
+        { name: 'The Weight', glyph: '\u25C8', interp: 'Holding onto anger at someone is like carrying a rock and waiting for them to feel heavy. They don\'t. You do.', prompt: '"May you be at peace." Not for them. For what it would free up in you.' },
+        { name: 'The Cord', glyph: '\u25CE', interp: 'You are connected to this person whether you like it or not. Compassion doesn\'t strengthen the cord. It loosens the knot.', prompt: '"May you be safe." Even if you\'re not ready to say more than that. Safety is enough to start.' },
+    ];
+
+    // Deck 5: group compassion deck
+    const DECK_GROUP = [
+        { name: 'The Armor', interp: 'You are wearing something heavy that used to protect you. It still works. But it\'s getting expensive. What would it cost to take one piece off in this room?', prompt: '"One thing I\'m protecting myself from in this group is..."' },
+        { name: 'The Letter', interp: 'If you could write one sentence to the version of you that started recovery, what would it say? Not advice. Just something you wish someone had told you.', prompt: '"What I wish I could tell my earlier self is..."' },
+        { name: 'The Gift', interp: 'Someone in this room has something you need to hear today. And you have something someone else needs to hear. Neither of you knows which one it is yet.', prompt: '"Something I\'ve learned in recovery that might help someone else is..."' },
+        { name: 'The Question', interp: 'There is a question you\'ve been carrying that you haven\'t asked out loud. Not because it\'s wrong. Because it feels too real. This is a room where real questions are welcome.', prompt: '"A question I\'ve been carrying is..."' },
+        { name: 'The Thanks', interp: 'Gratitude in recovery is complicated. You can be grateful for the progress and still angry about the cost. Both things fit in the same sentence.', prompt: '"Something I\'m grateful for that surprised me is..."' },
+        { name: 'The Wish', interp: 'If you could wish one thing for everyone in this room, including yourself, what would it be? Not a cure. Something smaller and more real than that.', prompt: '"What I wish for everyone here is..."' },
+        { name: 'The Proof', interp: 'You are looking for evidence that recovery works. You are the evidence. You are sitting in a room, doing a hard thing, on purpose. That is not nothing.', prompt: '"One piece of evidence that things are changing is..."' },
+    ];
+
+    const hands = {};
+
+    function cardHTML(c, idx, deckId) {
+        return `<div class="tarot-card" data-idx="${idx}" onclick="drawCard(this,${idx},${deckId})">
+            <div class="tarot-inner">
+                <div class="tarot-back">
+                    <div class="back-line-t"></div><div class="back-line-b"></div>
+                    <div class="back-corner bc-tl"></div><div class="back-corner bc-tr"></div>
+                    <div class="back-corner bc-bl"></div><div class="back-corner bc-br"></div>
+                    <span class="back-glyph">${c.glyph || '\u25C8'}</span>
+                    <span class="back-label">Compassion</span>
+                </div>
+                <div class="tarot-front">
+                    <div class="front-bar" style="background:var(--accent);"></div>
+                    <div class="front-suit" style="color:var(--accent);">Compassion</div>
+                    <div class="front-glyph" style="color:var(--accent);">${c.glyph || '\u25C8'}</div>
+                    <div class="front-name">${c.name}</div>
+                    <div class="front-hint">Draw</div>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function getDeckForId(deckId) {
+        if (deckId === 0) return DECK_EASY;
+        if (deckId === 4) return DECK_HARD;
+        if (deckId === 5) return DECK_GROUP;
+        return [];
+    }
+
+    function dealDeck(deckId) {
+        const deck = getDeckForId(deckId);
+        hands[deckId] = shuffle(deck).slice(0, 5);
+        const spread = document.getElementById('spread' + deckId);
+        spread.innerHTML = hands[deckId].map((c, i) => cardHTML(c, i, deckId)).join('');
+        const panel = document.getElementById('reading' + deckId);
+        if (panel) panel.classList.remove('active');
+        spread.querySelectorAll('.tarot-card').forEach(c => c.classList.remove('flipped', 'active'));
+    }
+
+    let drawCounts = {};
+
+    function drawCard(el, idx, deckId) {
+        if (el.classList.contains('flipped')) { showReading(idx, deckId); return; }
+        el.classList.add('flipped');
+        const spread = document.getElementById('spread' + deckId);
+        spread.querySelectorAll('.tarot-card').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        setTimeout(() => showReading(idx, deckId), 350);
+
+        drawCounts[deckId] = (drawCounts[deckId] || 0) + 1;
+        // Stage 0 completes after 2 draws, stage 4 after 1, stage 5 after 2
+        const needed = deckId === 4 ? 1 : 2;
+        if (drawCounts[deckId] >= needed) {
+            const stageIdx = deckId === 0 ? 0 : deckId === 4 ? 4 : 5;
+            setTimeout(() => showDone(stageIdx), 1200);
         }
     }
+
+    function showReading(idx, deckId) {
+        const c = hands[deckId][idx];
+        document.getElementById('r' + deckId + '-name').textContent = c.name;
+        document.getElementById('r' + deckId + '-interp').textContent = c.interp;
+        document.getElementById('r' + deckId + '-prompt').textContent = c.prompt;
+        const panel = document.getElementById('reading' + deckId);
+        panel.classList.remove('active');
+        void panel.offsetWidth;
+        panel.classList.add('active');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const spread = document.getElementById('spread' + deckId);
+        spread.querySelectorAll('.tarot-card').forEach(c => c.classList.remove('active'));
+        spread.querySelector('.tarot-card[data-idx="' + idx + '"]').classList.add('active');
+    }
+
+
+    // ===== REWRITE THE CRITIC =====
+    let criticCount = 0;
+
+    function revealCritic(el) {
+        if (el.classList.contains('revealed')) return;
+        el.classList.add('revealed');
+        criticCount++;
+        if (criticCount >= 6) {
+            setTimeout(() => showDone(1), 400);
+        }
+    }
+
 
     // ===== WHEEL =====
     const WHEEL_ITEMS = [
@@ -910,18 +1196,15 @@
         for (let i = 0; i < n; i++) {
             const startAngle = i * slice - 90;
             const endAngle = startAngle + slice;
-            const r = 120;
-            const cx = 130, cy = 130;
+            const r = 120, cx = 130, cy = 130;
             const x1 = cx + r * Math.cos(startAngle * Math.PI / 180);
             const y1 = cy + r * Math.sin(startAngle * Math.PI / 180);
             const x2 = cx + r * Math.cos(endAngle * Math.PI / 180);
             const y2 = cy + r * Math.sin(endAngle * Math.PI / 180);
-            const path = `M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z`;
-            html += `<path d="${path}" fill="${W_COLORS[i]}" stroke="${W_BORDERS[i]}" stroke-width="0.5"/>`;
+            html += `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z" fill="${W_COLORS[i]}" stroke="${W_BORDERS[i]}" stroke-width="0.5"/>`;
             const midAngle = (startAngle + slice / 2) * Math.PI / 180;
             const tx = cx + (r * 0.6) * Math.cos(midAngle);
             const ty = cy + (r * 0.6) * Math.sin(midAngle);
-            // Short label
             const labels = ['safe','happy','healthy','ease','okay','kinder','forgive','courage'];
             html += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="${W_BORDERS[i]}" font-family="Inter, sans-serif">${labels[i]}</text>`;
         }
@@ -937,23 +1220,19 @@
         const land = Math.floor(Math.random() * n);
         const target = extra * 360 + (360 - land * slice - slice / 2);
         document.getElementById('wheelGroup').style.transform = `rotate(${target}deg)`;
-
         setTimeout(() => {
             const item = WHEEL_ITEMS[land];
             document.getElementById('wrPhrase').textContent = item.phrase;
             document.getElementById('wrPrompt').textContent = item.prompt;
             const result = document.getElementById('wheelResult');
-            result.classList.remove('show');
-            void result.offsetWidth;
-            result.classList.add('show');
+            result.classList.remove('show'); void result.offsetWidth; result.classList.add('show');
             result.scrollIntoView({ behavior: 'smooth', block: 'center' });
             btn.disabled = false;
             spinCount++;
-            if (spinCount >= 2) {
-                setTimeout(() => showDone(1), 600);
-            }
+            if (spinCount >= 2) setTimeout(() => showDone(2), 600);
         }, 4200);
     }
+
 
     // ===== PHRASE BUILDER =====
     const picks = [null, null, null];
@@ -982,19 +1261,22 @@
             textEl.textContent = '\u201C' + phrase + '\u201D';
             textEl.classList.remove('placeholder');
             preview.classList.add('has-content');
-            if (picks[0] && picks[1]) {
-                btn.classList.add('ready');
-            }
+            if (picks[0] && picks[1]) btn.classList.add('ready');
         }
     }
 
     function lockPhrase() {
         if (!picks[0] || !picks[1]) return;
         document.getElementById('lockBtn').style.display = 'none';
-        showDone(2);
+        showDone(3);
     }
 
+
+    // ===== INIT =====
     buildWheel();
+    dealDeck(0);
+    dealDeck(4);
+    dealDeck(5);
 </script>
 </body>
 </html>
